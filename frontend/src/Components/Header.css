@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@500&display=swap');
+.headerContainer{
+    box-shadow: 0px 17px 10px -15px #6CAAD9;
+}
+.headerContainer2{
+    display: grid;
+    grid:  17vh/92vh 70vh auto;
+    justify-items: start;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    background-color: #ACD1EE;
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+.username2{
+    font-size: 6vh;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}
+.headerAvatar{
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50px;
+    border: 6px solid #6CAAD9;
+}
+
+.logoImg2{
+    height: 15vh;
+    width: 15vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+.buttonContainer{
+    display: flex;
+    gap: 2vh;
+    align-items: center;
+}
+.helpHead2{
+    color: #111;
+    font-size: 2.4vh;
+}
+.helpHead{
+    margin-top: 2vh;
+}

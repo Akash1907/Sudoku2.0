@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This package have all the backend dependencies",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "npm i"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "hapi-mongodb": "^10.0.3",
+    "mongoose": "^7.0.4",
+    "nodemon": "^2.0.22"
+  }
+}

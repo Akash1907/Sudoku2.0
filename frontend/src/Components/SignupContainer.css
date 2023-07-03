@@ -1,0 +1,127 @@
+.signup{
+    margin-top: 7vh;
+    margin-left: 20vh;
+    margin-right: 20vh;
+}
+.signup2{
+    border: 2px solid #F1F3F4;
+    border-radius: 15px;
+}
+.signup3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10vh;
+}
+.signupContainer{
+    margin-top: 6vh;
+}
+.line{
+    border-left: 2px solid #F1F3F4;
+    height: 30vh;
+    margin-top: 5vh;
+}
+.avatarPara{
+    display: flex;
+    justify-content: center;
+}
+.avatarPara2{
+    font-size: 3vh;
+}
+.avatarImg{
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50px;
+    /* border: 2px solid #909090; */
+}
+.avatarImages{
+    display: flex;
+    justify-content: center;
+}
+.listOfImg{
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 1px solid #909090;
+    gap: 2vh;
+    background-color: white;
+    height: 25vh;
+    width: 50vh;
+    overflow-y: scroll;
+    border-radius: 8px;
+    padding: 2vh;
+    cursor: pointer;
+}
+.signUpHead{
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+.signUpHead2{
+    font-size: 5.6vh;
+    letter-spacing: .2vh;
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+}
+.nameInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+}
+.passwordInput{
+    margin-top: 4vh;
+}
+.cnfPassword{
+    margin-top: 4vh;
+}
+.signupBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+}
+.signupBtn2{
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    background-color: #6CAAD9;
+    border: none;
+    border-radius: 10px;
+    font-size: 3vh;
+    padding: 1.5vh;
+    padding-left: 4vh;
+    padding-right: 4vh;
+    cursor: pointer;
+}
+.signupBtn2:hover{
+    color: #6CAAD9;
+    background-color: white;
+    outline: #6CAAD9 solid 3px;
+    transition: all .2s ease-in-out;
+}
+.avatarPara2{
+    color: #828282;
+    font-family: 'Nunito', sans-serif;
+}
+#selected{
+    outline: #6CAAD9 solid 6px;
+    border-radius: 50px;
+}
+.alreadyAcc{
+    display: flex;
+    justify-content: center;
+    margin-top: 4vh;
+}
+.alreadyAcc2{
+    color: rgb(117, 117, 117);
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
+}
+.loginBtn{
+    border: none;
+    background-color: white;
+    font-size: 2.3vh;
+    cursor: pointer;
+    letter-spacing: .1vh;
+    color: #6CAAD9;
+}

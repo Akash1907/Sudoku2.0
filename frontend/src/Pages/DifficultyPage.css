@@ -1,0 +1,74 @@
+.diffLevel{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.diffHead2{
+    font-size: 4rem;
+    background-color: #6CAAD9;
+    color: white;
+    padding: 10px;
+    display: inline;
+    border-radius: 15px;
+    letter-spacing: 5px;
+    font-family: 'Nunito', sans-serif;
+}
+.diffHead{
+    padding-bottom: 2rem;
+}
+.diffDesc{
+    display: flex;
+    justify-content: center;
+}
+.diffDesc2{
+    font-family: 'Nunito', sans-serif;
+    color: rgb(117, 117, 117);
+    font-size: 3vh;
+}
+.diffs{
+    margin: 2rem;
+}
+.diffs2{
+    /* text-align: center; */
+    border: 4px solid #6CAAD9;
+    background-color:#ACD1EE;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 15px;
+    color: white;
+    margin-top: 2vh;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+.diffs2:hover{
+    background-color: white;
+    color: #6CAAD9;
+    transition: all .2s ease-in-out;
+}
+ 
+@media only screen and (max-width: 768px)
+{
+    .diffLevel{
+        margin-top: 4rem;
+    }
+    .diffHead2{
+        font-size: 4rem;
+        background-color: #1F191B;
+        color: white;
+        padding: 5px;
+        display: inline;
+        border-radius: 10px;
+        letter-spacing: 2px;
+        padding:0px 10px;
+    }
+    .diffs2{
+        text-align: center;
+        border: 4px solid #1F191B;
+        background-color: #E5E5E5;
+        padding: 6px;
+        font-size: 1.8rem;
+        border-radius: 10px;
+        margin-top: -20px;
+        color: #1F191B;
+    }
+}

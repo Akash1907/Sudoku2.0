@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+html{scroll-behavior:smooth}
+
+.scoreboardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+.insideScore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid #6CAAD9;   
+    margin-top: 3.8vh;
+    border-radius: 10px;
+    background-color: #ACD1EE;
+}
+.scoreTitle{
+    background-color: #6CAAD9;
+    margin-top: -1vh;
+    padding-left: 15vh;
+    padding-right: 15vh;
+    border-radius: 10px 10px 0 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+.scoreTitle2{
+    font-family: 'Nunito', sans-serif;
+    font-size: 5vh;
+    color: white;
+    font-weight: 500;
+}
+
+.avatar-img{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 75px;
+    border: 6px solid #6CAAD9;
+    margin-top: 2vh;
+}
+.userDetails{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6vh;
+    font-size: 4vh;
+    margin-top: 2vh;
+}
+.credentials2{
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+}
+.values2{
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+}
+
+.replay-btn2{
+    height: 6vh;
+    width: 22vh;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 2.5vh;
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+    border: 3px solid #6CAAD9;
+}
+.replay-btn2:hover{
+    background-color: #6CAAD9;
+    color: white;
+}
+.leaderboardBtn2{
+    height: 6vh;
+    width: 22vh;
+    background-color:white;
+    border-radius: 10px;
+    font-size: 2.5vh;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    scroll-behavior: smooth;
+    border: 3px solid #6CAAD9;
+    color: #6CAAD9;
+}
+.leaderboardBtn2:hover{
+    background-color: #6CAAD9;
+    color: white;
+}
+.btns{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+.leaderboard-banner{
+    background-color: #6CAAD9;
+    margin: 2rem;
+    margin-top: 8%;
+    border-radius: 15px;
+    color: white;
+}
+.leaderboard{
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 3.5rem;
+    font-family: 'Nunito', sans-serif;
+}
+.top-scorer{
+    display: grid;
+    /* grid: auto / auto auto auto auto;     */
+    grid-template-columns : 2rem 3rem auto 3rem;
+    align-items: center;
+    margin-right: 5rem;
+    margin-left: 5rem;
+    border-radius: 15px;
+    border: 4px solid #6CAAD9;
+    margin-bottom: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    grid-gap: 10rem;
+    text-align: center;
+    transition: all .2s ease-in-out;
+    color: #6CAAD9;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+.top-scorer:hover{
+    transform: scale(1.05);
+    background-color: #ACD1EE;
+    color: white;
+}
+.avatar-leader-img{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50px;
+}
+.leader-score-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-right: 4rem;
+}
+.rank{
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+}
+.player-leader-name{
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+}
+.player-leader-score{
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+}
+.lead-container{
+    margin-top: 2%;
+    margin-left: 5%;
+}
+.lead-btn{
+    background-color: #1F191B;
+    color: white;
+    height: 3.5rem;
+    width: 11rem;
+    font-size: 2rem;
+    border-radius: 15px;
+    text-decoration: none;
+}
+.lead-btn:hover{
+    background-color: #E9E9E9;
+    color: #1F191B;
+    border: 4px solid #1F191B;
+    font-weight: 600;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    color: black;
+}
