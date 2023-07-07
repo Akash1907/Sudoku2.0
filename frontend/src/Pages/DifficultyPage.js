@@ -45,7 +45,7 @@ function DifficultyPage() {
       <div className='diffLevel'>
         <div className='diffLevel2'>
           <div className='diffHead'>
-            <p className='diffHead2'>DIFFICULTY</p>
+            {/* <p className='diffHead2'>DIFFICULTY</p> */}
           </div>
           <div className = 'diffDesc'>
             <p className = 'diffDesc2'>How good are you at Sudoku?</p>

@@ -6,8 +6,6 @@ require("./database/config");
 const User = require("./database/user");
 const Avatar = require("./database/avatars");
 var users = [];
-// var scores = [];
-// var topScores = [];
 const Joi = require("joi");
 
 const init = async () => {

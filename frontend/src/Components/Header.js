@@ -47,8 +47,8 @@ function Header(props) {
           {!props.checkPage ? <div className="buttonContainer" style={{marginLeft : "70vh"}}>
             <div className="aboutContainer">
               <div className="aboutButton">
-                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}}>
-                  ABOUT
+                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}} >
+                  About
                 </Button>
               </div>
               <div>
@@ -78,7 +78,7 @@ function Header(props) {
             </div>
             <div className="helpContainer">
               <div className="helpButton">
-                <Button variant="outlined" onClick={handleClickOpenHelp} sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
+                <Button variant="outlined" onClick={handleClickOpenHelp} sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px'  , textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
                   Help
                 </Button>
               </div>
@@ -132,7 +132,7 @@ function Header(props) {
           </div> : <div className="buttonContainer">
             <div className="aboutContainer">
               <div className="aboutButton">
-                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}}>
+                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}}>
                   About
                 </Button>
               </div>
@@ -163,7 +163,7 @@ function Header(props) {
             </div>
             <div className="helpContainer">
               <div className="helpButton">
-                <Button variant="outlined" onClick={handleClickOpenHelp}sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
+                <Button variant="outlined" onClick={handleClickOpenHelp}sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
                   Help
                 </Button>
               </div>

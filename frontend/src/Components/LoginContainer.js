@@ -3,6 +3,12 @@ import {useNavigate, Link} from "react-router-dom";
 import "./LoginContainer.css";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
+import Slide from "@mui/material/Slide";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+
 
 function LoginContainer(props) {
   localStorage.clear();
@@ -13,18 +19,32 @@ function LoginContainer(props) {
     password : password
   }
 
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+  const handleClose3 = () => {
+    setOpen3(false);
+  };
+
   const userLogin = async () => {
     if(username === '' && password !== '')
     {
-      alert('Please enter the username to login');
+      setOpen1(true);
     }
     else if(password === '' && username !== '')
     {
-      alert('Please enter the Password to login');
+      setOpen2(true);
     }
     else if(password === '' && username === '')
     {
-      alert('Please enter the username and password to login')
+      setOpen3(true);
     }
     else{
       (axios
@@ -68,6 +88,45 @@ function LoginContainer(props) {
           <div className="signinBtn">
               <button className="signinBtn2" onClick={userLogin}>Login</button>
           </div>
+          <Dialog
+              open={open1}
+              keepMounted
+              onClose={handleClose1}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter the username to login"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose1}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open2}
+              keepMounted
+              onClose={handleClose2}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter the password to login"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose2}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open3}
+              keepMounted
+              onClose={handleClose3}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter the username and password to login"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose3}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
           <div className="guestBtn">
               <button className="guestBtn2" onClick = {guestClick}>Continue as guest</button>
           </div>

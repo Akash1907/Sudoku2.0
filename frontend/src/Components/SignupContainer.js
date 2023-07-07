@@ -5,6 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 function SignupContainer(props) {
   const [username, setUsername] = useState("");
@@ -28,17 +32,44 @@ function SignupContainer(props) {
     score: score,
   };
 
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
+  const [open5, setOpen5] = useState(false);
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+  const handleClose3 = () => {
+    setOpen3(false);
+  };
+  const handleClose4 = () => {
+    setOpen4(false);
+  };
+  const handleClose5 = () => {
+    setOpen5(false);
+  };
+
   const collectData = async () => {
     if (password !== cnfPassword) {
-      alert("Password doesn't Match");
+      // alert("Password doesn't Match");
+      setOpen1(true);
     } else if (userAvatarUrl === "") {
-      alert("Plase select a Avatar");
+      // alert("Plase select a Avatar");
+      setOpen2(true);
     } else if (username === "") {
-      alert("Please enter the Username");
+      // alert("Please enter the Username");
+      setOpen3(true);
     } else if (name === "") {
-      alert("Please enter your name");
+      // alert("Please enter your name");
+      setOpen4(true);
     } else if (username.includes(" ")) {
-      alert("Please enter the correct username");
+      // alert("Please enter the correct username");
+      setOpen5(true);
     } else
       axios
         .post("http://localhost:8000/register", obj)
@@ -156,6 +187,71 @@ function SignupContainer(props) {
               </div>
             </div>
           </div>
+          <Dialog
+              open={open1}
+              keepMounted
+              onClose={handleClose1}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Password doesn't Match"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose1}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open2}
+              keepMounted
+              onClose={handleClose2}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please select a Avatar"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose2}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open3}
+              keepMounted
+              onClose={handleClose3}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter the Username"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose3}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open4}
+              keepMounted
+              onClose={handleClose4}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter your name"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose4}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open5}
+              keepMounted
+              onClose={handleClose5}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Please enter the correct username"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose5}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
           <div className="signupBtn">
             <button className="signupBtn2" onClick={collectData}>
               Sign Up
