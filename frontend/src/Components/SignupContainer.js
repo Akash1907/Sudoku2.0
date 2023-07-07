@@ -72,7 +72,7 @@ function SignupContainer(props) {
       setOpen5(true);
     } else
       axios
-        .post("http://localhost:8000/register", obj)
+        .post("https://sudoku2-0-akash1907.vercel.app/register", obj)
         .then((response) => {
           // setUserData(response.data);
           console.log(response);
@@ -87,7 +87,7 @@ function SignupContainer(props) {
 
   const getAvatars = () => {
     axios
-      .get("http://localhost:8000/getAvatars")
+      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
       .then((response) => {
         setAvatarData(response.data);
         setLoading(false);

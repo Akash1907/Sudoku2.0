@@ -234,7 +234,7 @@ function SudokuPage(props) {
             event.preventDefault();
             console.log("User-Score:", score);
             axios
-              .post(`http://localhost:8000/setScore/${username}`, obj)
+              .post(`https://sudoku2-0-akash1907.vercel.app/setScore/${username}`, obj)
               .then((response) => {
                 localStorage.setItem("score", score);
                 console.log(response);
@@ -263,7 +263,7 @@ function SudokuPage(props) {
             event.preventDefault();
             console.log("User-Score:", score);
             axios
-              .post(`http://localhost:8000/setScore/${username}`, obj)
+              .post(`https://sudoku2-0-akash1907.vercel.app//setScore/${username}`, obj)
               .then((response) => {
                 localStorage.setItem("score", score);
                 console.log(response);
