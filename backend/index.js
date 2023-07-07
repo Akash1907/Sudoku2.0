@@ -14,7 +14,7 @@ const init = async () => {
     host: "localhost",
     routes: {
       cors: {
-        origin: ["*"], // an array of origins or 'ignore'
+        origin: ["https://sudoku2-0-akash1907.vercel.app/"], // an array of origins or 'ignore'
         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
       },
     },
