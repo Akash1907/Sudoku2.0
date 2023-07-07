@@ -20,17 +20,16 @@ const Joi = require("joi");
 //     },
 //   });
 
-  const init = async () => {
-    const server = Hapi.server({
-      port: process.env.PORT || 3000,
-      host: "sudoku2-0-akash1907.vercel.app", // Update the host to your specific URL
-      routes: {
-        cors: {
-          origin: ["*"], // an array of origins or 'ignore'
-          credentials: true, // boolean - 'Access-Control-Allow-Credentials'
-        },
+const init = async () => {
+  const server = Hapi.server({
+    port: process.env.PORT || 3000,
+    routes: {
+      cors: {
+        origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
+        credentials: true, // boolean - 'Access-Control-Allow-Credentials'
       },
-    });
+    },
+  });
 
   
 
