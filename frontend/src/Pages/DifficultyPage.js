@@ -13,7 +13,7 @@ function DifficultyPage() {
   const[difficulty, setDifficulty] = useState("");
   const  getUsers = async () => {
     await axios
-      .get("https://sudoku2-0-akash1907.vercel.app/getUsers")
+      .get("http://localhost:8000/getUsers")
       .then((response) => {
         setUserData(response.data);
         console.log(response.data);
@@ -45,7 +45,7 @@ function DifficultyPage() {
       <div className='diffLevel'>
         <div className='diffLevel2'>
           <div className='diffHead'>
-            {/* <p className='diffHead2'>DIFFICULTY</p> */}
+            <p className='diffHead2'>DIFFICULTY</p>
           </div>
           <div className = 'diffDesc'>
             <p className = 'diffDesc2'>How good are you at Sudoku?</p>

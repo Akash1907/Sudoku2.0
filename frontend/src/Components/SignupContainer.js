@@ -1,9 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./SignupContainer.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Loader from "./Loader";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -14,22 +12,10 @@ function SignupContainer(props) {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [score, setScore] = useState([]);
   const [cnfPassword, setCnfPassword] = useState("");
-  const [userAvatarUrl, setUserAvatarUrl] = useState("");
-  const [avatarData, setAvatarData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const handleOptionClick = (value) => {
-    setUserAvatarUrl(value);
-  };
 
   const obj = {
     username: username,
-    name: name,
-    password: password,
-    avatarUrl: userAvatarUrl,
-    score: score,
   };
 
   const [open1, setOpen1] = useState(false);
@@ -37,6 +23,7 @@ function SignupContainer(props) {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
+  const [open6, setOpen6] = useState(false);
 
   const handleClose1 = () => {
     setOpen1(false);
@@ -53,65 +40,44 @@ function SignupContainer(props) {
   const handleClose5 = () => {
     setOpen5(false);
   };
+  const handleClose6 = () => {
+    setOpen6(false);
+  };
 
   const collectData = async () => {
-    if (password !== cnfPassword) {
-      // alert("Password doesn't Match");
-      setOpen1(true);
-    } else if (userAvatarUrl === "") {
-      // alert("Plase select a Avatar");
-      setOpen2(true);
-    } else if (username === "") {
-      // alert("Please enter the Username");
+    if (username === "") {
       setOpen3(true);
     } else if (name === "") {
-      // alert("Please enter your name");
       setOpen4(true);
+    } else if (password === "") {
+      setOpen2(true);
+    } else if (password !== cnfPassword) {
+      setOpen1(true);
     } else if (username.includes(" ")) {
-      // alert("Please enter the correct username");
       setOpen5(true);
-    } else
+    } else {
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app/register", obj)
+        .post("https://sudoku2-0-akash1907.vercel.app/signupAuth", obj)
         .then((response) => {
-          // setUserData(response.data);
           console.log(response);
-          localStorage.setItem("username", obj.username);
+          props.nextClick();
+          localStorage.setItem("username", username);
+          localStorage.setItem("name", name);
+          localStorage.setItem("password", password);
         })
-        .then(() => NavigateToDifficulty())
         .catch((error) => {
           console.error(error);
-          alert("Username already exists");
+          setOpen6(true);
         });
+    }
   };
 
-  const getAvatars = () => {
-    axios
-      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
-      .then((response) => {
-        setAvatarData(response.data);
-        setLoading(false);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-  useEffect(() => {
-    getAvatars();
-  }, []);
-
-  const navigate = useNavigate();
-  const NavigateToDifficulty = () => {
-    navigate("/difficulty");
-  };
-
-  return props.trigger3 ? (
+  return (
     <>
       <div className="signup">
         <div className="signup2">
           <div className="signUpHead">
-            <p className="signUpHead2">Welcome!</p>
+            <p className="signUpHead2">Sign Up</p>
           </div>
           <div className="signup3">
             <div className="signupContainer">
@@ -160,119 +126,89 @@ function SignupContainer(props) {
                 </div>
               </div>
             </div>
-            <div className="line"></div>
-            <div className="avatarContainer">
-              <div className="avatarPara">
-                <p className="avatarPara2">Please Select an Avatar</p>
-              </div>
-              <div className="avatarImages">
-                <div className="listOfImg">
-                  {loading ? (
-                    <Loader />
-                  ) : (
-                    <>
-                      {avatarData?.map((i) => {
-                        return (
-                          <img
-                            className="avatarImg"
-                            id={userAvatarUrl === i.url ? "selected" : ""}
-                            onClick={() => handleOptionClick(i.url)}
-                            src={i.url}
-                          />
-                        );
-                      })}
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
           </div>
           <Dialog
-              open={open1}
-              keepMounted
-              onClose={handleClose1}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Password doesn't Match"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose1}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-            <Dialog
-              open={open2}
-              keepMounted
-              onClose={handleClose2}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Please select a Avatar"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose2}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-            <Dialog
-              open={open3}
-              keepMounted
-              onClose={handleClose3}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Please enter the Username"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose3}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-            <Dialog
-              open={open4}
-              keepMounted
-              onClose={handleClose4}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Please enter your name"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose4}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-            <Dialog
-              open={open5}
-              keepMounted
-              onClose={handleClose5}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Please enter the correct username"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose5}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
+            open={open1}
+            keepMounted
+            onClose={handleClose1}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Password doesn't Match"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose1}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={open3}
+            keepMounted
+            onClose={handleClose3}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Please enter the Username"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose3}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={open4}
+            keepMounted
+            onClose={handleClose4}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Please enter your name"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose4}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={open5}
+            keepMounted
+            onClose={handleClose5}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Please enter the correct username"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose5}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={open2}
+            keepMounted
+            onClose={handleClose2}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Please enter the password"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose2}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={open6}
+            keepMounted
+            onClose={handleClose6}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Username already exists"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose6}>OKAY</Button>
+            </DialogActions>
+          </Dialog>
           <div className="signupBtn">
             <button className="signupBtn2" onClick={collectData}>
-              Sign Up
+              Next
             </button>
           </div>
         </div>
         <div className="alreadyAcc">
           <p className="alreadyAcc2">
             Already have an account?{" "}
-            <button
-              className="loginBtn"
-              onClick={() => props.setTrigger3(false)}
-            >
+            <button className="loginBtn" onClick={props.loginClick}>
               Log In
             </button>
           </p>
         </div>
       </div>
     </>
-  ) : (
-    ""
   );
 }
 

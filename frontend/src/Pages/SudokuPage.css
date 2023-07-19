@@ -1,121 +1,171 @@
-#cellInput{
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    text-align: center;
-    padding: 0px;
-    border: 1px solid;
-    position: relative;
-    z-index: 1;
+#cellInput {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  padding: 0px;
+  border: 1px solid;
+  position: relative;
+  z-index: 3;
 }
-.colorId{
-    background-color: #ACD1EE;
+.colorId {
+  background-color: #acd1ee;
 }
-input{
-    color: black;
+input {
+  color: black;
 }
-input::selection{
-    border: #6CAAD9;
+input::selection {
+  border: #6caad9;
 }
-input:disabled{
-    color: rgb(134, 134, 134);
+input:disabled {
+  color: rgb(134, 134, 134);
+  position: relative;
+  z-index: 2;
+  /* background-color: #6d6c6c; */
 }
-
-.sudoku-container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 4vh;
+.sudoku-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.midSection{
-    margin-left: 15vh;
+table {
+  border-collapse: collapse;
+  border: 5px solid #6caad9;
 }
-table{
-    border-collapse: collapse;
-    border: 5px solid #6CAAD9;
+td {
+  padding: 0;
 }
-td{
-    padding: 0;
+.bBorder {
+  border-bottom: 2px solid #6caad9;
 }
-.bBorder{
-    border-bottom: 2px solid #6CAAD9;
+.rBorder {
+  border-right: 2px solid #6caad9;
 }
-.rBorder{
-    border-right: 2px solid #6CAAD9;
-}
-input::placeholder{
-    font-size: 12px;
-    justify-content: space-between;
+input::placeholder {
+  font-size: 12px;
+  justify-content: space-between;
 }
 .input-wrapper {
-    position: relative;
-  }
-  .input-wrapper div{
-    position: absolute;
-    top: 0;
+  position: relative;
+}
+.input-wrapper div {
+  position: absolute;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   display: flex;
   pointer-events: none;
-  z-index: 5;
   margin: 2px;
   font-size: 10px;
   color: #6d6c6c;
 }
-.timer{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.5vh;
+.leftSection {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+  margin-left: -4vh;
+  margin-bottom: 1vh;
 }
-.time{
-    border: 4px solid #6CAAD9;
-    border-radius: 15px;
-    height: 10vh;
-    width: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6CAAD9;
-    background-color: #ACD1EE;
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5vh;
 }
-.midDot{
-    color: #6CAAD9;
-    font-size: 5vh;
+.time {
+  border: 2px solid #6caad9;
+  border-radius: 10px;
+  height: 6vh;
+  width: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6caad9;
+  background-color: #acd1ee;
 }
-.time-p{
-    font-size: 5vh;
+.midDot {
+  color: #6caad9;
+  font-size: 4vh;
 }
-.newGameBtn{
-    height: 8vh;
-    width: 50vh;
-    border-radius: 10px;
-    margin-top: 4vh;
-    font-size: 4vh;
-    background-color: #6CAAD9;
-    color: white;
-    border: none;
-    font-family: 'Nunito', sans-serif;
+.time-p {
+  font-size: 3.5vh;
 }
-.newGameBtn:hover{
-    background-color: white;
-    color: #6CAAD9;
-    border: 4px solid #6CAAD9;
+.newGameBtn {
+  height: 8vh;
+  width: 50vh;
+  border-radius: 10px;
+  margin-top: 4vh;
+  font-size: 4vh;
+  background-color: #6caad9;
+  color: white;
+  border: none;
+  font-family: "Nunito", sans-serif;
 }
-.iconBtn{
-    display: flex;
-    flex-direction: column;
-    margin-left: 20vh;
+.newGameBtn:hover {
+  background-color: white;
+  color: #6caad9;
+  border: 4px solid #6caad9;
 }
-.iconBtn2{
-    /* border: 4px solid #6CAAD9; */
+.iconBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4.4vh;
 }
-.tooltiptext{
-    position: absolute;
-    margin-left: 2vh;
-    font-size: 2vh;
-    font-family: 'Nunito', sans-serif;
-    color: #6CAAD9;
+.iconBtn2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tooltiptext {
+  color: white;
+  font-family: "Nunito", sans-serif;
+}
 
+.slidingContainer {
+  border-radius: 0px 10px 10px 0px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: -7.8vh;
+}
+.optionsBtnClose {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  background-color: #6caad9;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+  color: white;
+}
+.optionsBtnOpen {
+  transition: transform 1s;
+  transform: translateX(10.9vh);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  background-color: #6caad9;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+  color: white;
+}
+.rightSectionOpen {
+  position: absolute;
+  padding: 1.5vh;
+  background-color: #6caad9;
+  right: 2rem;
+  transition: transform 1s;
+  transform: translateX(11.2vh);
+  border-radius: 0px 10px 10px 0px;
+  z-index: 1;
+}
+.rightSectionClose {
+  position: absolute;
+  right: 3rem;
+  visibility: hidden;
 }

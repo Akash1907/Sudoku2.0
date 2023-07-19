@@ -22,6 +22,7 @@ function LoginContainer(props) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
 
   const handleClose1 = () => {
     setOpen1(false);
@@ -31,6 +32,9 @@ function LoginContainer(props) {
   };
   const handleClose3 = () => {
     setOpen3(false);
+  };
+  const handleClose4 = () => {
+    setOpen4(false);
   };
 
   const userLogin = async () => {
@@ -57,7 +61,7 @@ function LoginContainer(props) {
         .catch((error) => {
           console.error(error);
           console.log("Credentials are not correct");
-          alert('Username or password is incorrect');
+          setOpen4(true);
         })
       )
     }
@@ -77,7 +81,7 @@ function LoginContainer(props) {
       <div className="loginContainer">
         <div className="loginContainer2">
           <div className="loginHeading">
-            <p className="loginHeading2">Welcome Back!</p>
+            <p className="loginHeading2"><span className = 'welcome'>Welcome </span>Back!</p>
           </div>
           <div className="userID">
             <TextField id="outlined-basic" label="Username" variant="outlined" value = {username} onChange={(e) => setUsername(e.target.value)} sx =  {{width : "51vh"}} />
@@ -125,6 +129,19 @@ function LoginContainer(props) {
               </DialogTitle>
               <DialogActions>
                 <Button onClick={handleClose3}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              open={open4}
+              keepMounted
+              onClose={handleClose4}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Username or password is incorrect"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose4}>OKAY</Button>
               </DialogActions>
             </Dialog>
           <div className="guestBtn">

@@ -10,11 +10,11 @@ const Joi = require("joi");
 
 // const init = async () => {
 //   const server = Hapi.server({
-//     // port: 8000,
-//     // host: "localhost",
+//     port: 8000,
+//     host: "localhost",
 //     routes: {
 //       cors: {
-//         origin: ["https://sudoku2-0-akash1907.vercel.app/"], // an array of origins or 'ignore'
+//         origin: ["*"], // an array of origins or 'ignore'
 //         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
 //       },
 //     },
@@ -74,9 +74,9 @@ const init = async () => {
       const { username, password } = request.payload;
       let person = request.query;
       let result = await User.find(person).lean();
-      users = result;
-      console.log(users);
-      const existingUser = users.find(
+      // users = result;
+      console.log(result);
+      const existingUser = result.find(
         (user) => user.username === username && user.password === password
       );
       if (existingUser) {
@@ -84,6 +84,24 @@ const init = async () => {
         return h.response("Logged in successfully").code(200);
       }
       return h.response("Please enter correct credentials").code(409);
+    },
+  });
+
+  server.route({
+    method: "POST",
+    path: "/signupAuth",
+    handler: async (request, h) => {
+      const { username } = request.payload;
+      let person = request.query;
+      let result = await User.find(person).lean();
+      console.log(result);
+      const existingUser = result.find(
+        (user) => user.username === username
+      );
+      if (!existingUser) {
+        return h.response("Username doesn't exist").code(200);
+      }
+      return h.response("Username already Exists").code(409);
     },
   });
 
@@ -166,8 +184,6 @@ const init = async () => {
           )
           .sort((a, b) => b.score - a.score)
           .slice(0, 5);
-
-        console.log(arrTop);
         console.log("top rankers are ==", arrTop);
         return h.response(arrTop);
       } catch (err) {

@@ -16,6 +16,7 @@ import TimerIcon from "@mui/icons-material/Timer";
 import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(
@@ -127,7 +128,6 @@ function SudokuPage(props) {
 
   const [checkSolve, setCheckSolve] = useState(false);
   function solveSudoku() {
-    alert("Are you sure?");
     let sudoku = getDeepCopy(props.initial);
     solver(sudoku);
     setSudokuArr(sudoku);
@@ -138,12 +138,6 @@ function SudokuPage(props) {
   //funtion to reset the sudoku
   function resetSudoku() {
     let sudoku = getDeepCopy(props.initial);
-    // let sudokuArray = getDeepCopy(sudokuArr);
-    if (sudokuArr === sudoku) {
-      alert("Your sudoku is already");
-    } else {
-      alert("Are You Sure?");
-    }
     setSudokuArr(sudoku);
     setSeconds(0);
     setMinutes(0);
@@ -227,7 +221,6 @@ function SudokuPage(props) {
     if (check) {
       setOpen(true);
     } else {
-      if (!checkSolve) {
         setTriggerConfetti(!triggerConfetti);
         if (username != "guest") {
           setTimeout(() => {
@@ -251,42 +244,13 @@ function SudokuPage(props) {
             event.preventDefault();
             console.log("User-Score:", score);
             localStorage.setItem("score", score);
-            localStorage.setItem("minutes",minutes);
-            localStorage.setItem("seconds", seconds);
             NavigateToScore();
           }, 3500);
         }
-      } else if (checkSolve) {
-        setTriggerGameOver(!triggerGameOver);
-        if (username != "guest") {
-          setTimeout(() => {
-            event.preventDefault();
-            console.log("User-Score:", score);
-            axios
-              .post(`https://sudoku2-0-akash1907.vercel.app//setScore/${username}`, obj)
-              .then((response) => {
-                localStorage.setItem("score", score);
-                console.log(response);
-                console.log("score pushed Successfully");
-              })
-              .catch((error) => {
-                console.error(error);
-                console.log("Scores couldn't pushed");
-              })
-              .then(() => NavigateToScore());
-          }, 1800);
-        } else {
-          setTimeout(() => {
-            event.preventDefault();
-            console.log("User-Score:", score);
-            localStorage.setItem("score", score);
-            NavigateToScore();
-          }, 1800);
-        }
       }
     }
-  };
-  // console.log(score);
+  
+
   const navigate = useNavigate();
   const NavigateToScore = () => {
     navigate("/scores");
@@ -431,42 +395,24 @@ function SudokuPage(props) {
 
   const [isFocused, setIsFocused] = useState(false);
   const myStyles = {
-    1: { left: "0px" },
-    2: { left: "20px" },
-    3: { left: "40px" },
-    4: { left: "40px", top: "18px" },
-    5: { left: "40px", top: "35px" },
-    6: { left: "20px", top: "35px" },
-    7: { left: "0px", top: "35px" },
-    8: { left: "0px", top: "18px" },
-    9: { left: "20px", top: "18px" },
+    1: { left: "0px", zIndex: 12 },
+    2: { left: "20px", zIndex: 12 },
+    3: { left: "40px", zIndex: 12 },
+    4: { left: "40px", top: "18px", zIndex: 12 },
+    5: { left: "40px", top: "35px", zIndex: 12 },
+    6: { left: "20px", top: "35px", zIndex: 12 },
+    7: { left: "0px", top: "35px", zIndex: 12 },
+    8: { left: "0px", top: "18px", zIndex: 12 },
+    9: { left: "20px", top: "18px", zIndex: 12 },
   };
 
   function handleBlur() {
     setIsFocused(false);
   }
 
-  const [showHelpTip, setShowHelpTip] = useState(false);
-  const [showResetTip, setShowResetTip] = useState(false);
-  const [showSolveTip, setShowSolveTip] = useState(false);
-
-  const helpEnter = () => {
-    setShowHelpTip(true);
-  };
-  const helpLeave = () => {
-    setShowHelpTip(false);
-  };
-  const resetEnter = () => {
-    setShowResetTip(true);
-  };
-  const resetLeave = () => {
-    setShowResetTip(false);
-  };
-  const solveEnter = () => {
-    setShowSolveTip(true);
-  };
-  const solveLeave = () => {
-    setShowSolveTip(false);
+  const [isSlidingVisible, setSlidingVisible] = useState(false);
+  const handleSlideButtonClick = () => {
+    setSlidingVisible(!isSlidingVisible);
   };
 
   return (
@@ -474,12 +420,12 @@ function SudokuPage(props) {
       <Header name={name} avatarUrl={avatarUrl} checkPage={checkPage} />
       {triggerConfetti && <Confetti />}
       {triggerGameOver && <GameOver />}
-      <div className="sudoku-container">
+      <div className="sudokuCont">
         <div className="leftSection">
           <div className="timer-container">
             <div className="timer">
               <TimerIcon
-                sx={{ height: "3rem", width: "3rem", color : "#6CAAD9" }}
+                sx={{ height: "3rem", width: "3rem", color: "#6CAAD9" }}
                 className="timer-icon"
               />
               <div className="time">
@@ -499,175 +445,203 @@ function SudokuPage(props) {
               </div>
             </div>
           </div>
-          <Link to="/difficulty">
-            <button className="newGameBtn">NEW GAME</button>
-          </Link>
         </div>
-        <div className="midSection">
-          <div className="App-header">
-            <table>
-              <tbody>
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
-                  return (
-                    <tr
-                      key={rIndex}
-                      className={(row + 1) % 3 === 0 ? "bBorder" : ""}
-                    >
-                      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
-                        return (
-                          <td
-                            key={rIndex + cIndex}
-                            className={(col + 1) % 3 === 0 ? "rBorder" : ""}
-                          >
-                            <div className="input-wrapper">
-                              <input
-                                autoComplete="off"
-                                onChange={(e) => onInputChange(e, row, col)}
-                                value={
-                                  sudokuArr[row][col] === -1
-                                    ? ""
-                                    : sudokuArr[row][col]
-                                }
-                                id="cellInput"
-                                style={
-                                  checkWrong(row, col)
-                                    ? { boxShadow: "inset 0 0 10px red" }
-                                    : { borderColor: "#6CAAD9" }
-                                }
-                                disabled={props.initial[row][col] !== -1}
-                                className={
-                                  (row <= 2 && col <= 2) ||
-                                  (col <= 8 && col > 5 && row <= 2) ||
-                                  (col >= 3 &&
-                                    col <= 5 &&
-                                    row >= 3 &&
-                                    row <= 5) ||
-                                  (col <= 2 && row > 5) ||
-                                  (col > 5 && row > 5)
-                                    ? "colorId"
-                                    : ""
-                                }
-                                onFocus={onInputChange}
-                                onBlur={handleBlur}
-                              />
-                              {displayHint
-                                ? (sudokuArr[row][col] === -1
-                                    ? ""
-                                    : sudokuArr[row][col]) === "" &&
-                                  Object.entries(myStyles).map(([key, style]) =>
-                                    checkHint(row, col).includes(
-                                      parseInt(key)
-                                    ) ? (
-                                      <div key={key} style={style}>
-                                        <div>{key}</div>
-                                      </div>
-                                    ) : (
-                                      ""
+        <div className="sudoku-container">
+        
+          <div className="midSection">
+            <div className="App-header">
+              <table>
+                <tbody>
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
+                    return (
+                      <tr
+                        key={rIndex}
+                        className={(row + 1) % 3 === 0 ? "bBorder" : ""}
+                      >
+                        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
+                          return (
+                            <td
+                              key={rIndex + cIndex}
+                              className={(col + 1) % 3 === 0 ? "rBorder" : ""}
+                            >
+                              <div className="input-wrapper">
+                                <input
+                                  autoComplete="off"
+                                  onChange={(e) => onInputChange(e, row, col)}
+                                  value={
+                                    sudokuArr[row][col] === -1
+                                      ? ""
+                                      : sudokuArr[row][col]
+                                  }
+                                  id="cellInput"
+                                  style={
+                                    checkWrong(row, col)
+                                      ? { boxShadow: "inset 0 0 10px red" }
+                                      : { borderColor: "#6CAAD9" }
+                                  }
+                                  disabled={props.initial[row][col] !== -1}
+                                  className={
+                                    (row <= 2 && col <= 2) ||
+                                    (col <= 8 && col > 5 && row <= 2) ||
+                                    (col >= 3 &&
+                                      col <= 5 &&
+                                      row >= 3 &&
+                                      row <= 5) ||
+                                    (col <= 2 && row > 5) ||
+                                    (col > 5 && row > 5)
+                                      ? "colorId"
+                                      : ""
+                                  }
+                                  onFocus={onInputChange}
+                                  onBlur={handleBlur}
+                                />
+                                {displayHint
+                                  ? (sudokuArr[row][col] === -1
+                                      ? ""
+                                      : sudokuArr[row][col]) === "" &&
+                                    Object.entries(myStyles).map(
+                                      ([key, style]) =>
+                                        checkHint(row, col).includes(
+                                          parseInt(key)
+                                        ) ? (
+                                          <div key={key} style={style}>
+                                            <div>{key}</div>
+                                          </div>
+                                        ) : (
+                                          ""
+                                        )
                                     )
-                                  )
-                                : ""}
-                            </div>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <div className="submit-btn">
-            <Button
-              variant="outlined"
-              onClick={handleSubmit}
-              sx={{
-                marginTop: "2vh",
-                fontFamily: 'Nunito',
-                backgroundColor: "#6CAAD9",
-                color: "white",
-                height: "6vh",
-                width: "63vh",
-                fontSize: "2rem",
-                borderRadius: "10px",
-                "&:hover": {
-                  background: "white",
-                  color: "#6CAAD9",
-                  border: "4px solid #6CAAD9",
-                  fontWeight: "400",
-                },
-              }}
-            >
-              SUBMIT
-            </Button>
-            <Dialog
-              open={open}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={handleClose}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Your SUDOKU is either not completed or wrong. Keep Trying!"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-          </div>
-        </div>
-        <div className="rightSection">
-          <div className="iconBtn">
-            <div className="iconBtn2">
-              <TipsAndUpdatesRoundedIcon
-                onClick={clickHint}
-                sx={{
-                  height: "8vh",
-                  width: "8vh",
-                  border: "4px solid #6CAAD9",
-                  cursor: "pointer",
-                  color : "#6CAAD9"
-                }}
-                onMouseEnter={helpEnter}
-                onMouseLeave={helpLeave}
-              />
-              <div className = 'kk'>
-               <span className="tooltiptext">Help</span>
-              </div>
+                                  : ""}
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-            <div className="iconBtn2">
-              <RestartAltRoundedIcon
-                onClick={resetSudoku}
+            <div className="submit-btn">
+              <Button
+                variant="outlined"
+                onClick={handleSubmit}
                 sx={{
-                  height: "8vh",
-                  width: "8vh",
-                  border: "4px solid #6CAAD9",
-                  marginTop: "8vh",
-                  cursor: "pointer",
-                  color: "#6CAAD9"
+                  marginTop: "2vh",
+                  fontFamily: "Nunito",
+                  backgroundColor: "#6CAAD9",
+                  color: "white",
+                  height: "6vh",
+                  width: "63vh",
+                  fontSize: "2rem",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    background: "white",
+                    color: "#6CAAD9",
+                    border: "4px solid #6CAAD9",
+                    fontWeight: "400",
+                  },
                 }}
-                onMouseEnter={resetEnter}
-                onMouseLeave={resetLeave}
-              />
-              <div className = 'kk'>
-                <span className="tooltiptext">Reset</span>
-              </div>
+              >
+                SUBMIT
+              </Button>
+              <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle>
+                  {"Your SUDOKU is either not completed or wrong. Keep Trying!"}
+                </DialogTitle>
+                <DialogActions>
+                  <Button onClick={handleClose}>OKAY</Button>
+                </DialogActions>
+              </Dialog>
             </div>
-            <div className="iconBtn2">
-              <CheckCircleRoundedIcon
-                onClick={solveSudoku}
-                sx={{
-                  height: "8vh",
-                  width: "8vh",
-                  border: "4px solid #6CAAD9",
-                  marginTop: "8vh",
-                  cursor: "pointer",
-                  color : "#6CAAD9"
-                }}
-                onMouseEnter={solveEnter}
-                onMouseLeave={solveLeave}
-              />
-              <div className = 'kk'>
-                <span className="tooltiptext">Solve</span>
+          </div>
+          <div className="slidingContainer">
+            <button
+              className={
+                isSlidingVisible ? "optionsBtnOpen" : "optionsBtnClose"
+              }
+              onClick={handleSlideButtonClick}
+            >
+              OPTIONS
+            </button>
+
+            <div
+              className={
+                isSlidingVisible ? "rightSectionOpen" : "rightSectionClose"
+              }
+            >
+              <div className="iconBtn">
+                <div className="iconBtn2">
+                  <TipsAndUpdatesRoundedIcon
+                    onClick={clickHint}
+                    sx={{
+                      height: "7vh",
+                      width: "7vh",
+                      border: "4px solid white",
+                      borderRadius: "15px",
+                      cursor: "pointer",
+                      color: "white",
+                    }}
+                  />
+                  <div className="kk">
+                    <span className="tooltiptext">Hint</span>
+                  </div>
+                </div>
+                <div className="iconBtn2">
+                  <RestartAltRoundedIcon
+                    onClick={resetSudoku}
+                    sx={{
+                      height: "7vh",
+                      width: "7vh",
+                      border: "4px solid white",
+                      borderRadius: "15px",
+                      cursor: "pointer",
+                      color: "white",
+                    }}
+                  />
+                  <div className="kk">
+                    <span className="tooltiptext">Reset</span>
+                  </div>
+                </div>
+                <div className="iconBtn2">
+                  <CheckCircleRoundedIcon
+                    onClick={solveSudoku}
+                    sx={{
+                      height: "7vh",
+                      width: "7vh",
+                      border: "4px solid white",
+                      borderRadius: "15px",
+                      cursor: "pointer",
+                      color: "white",
+                    }}
+                  />
+                  <div className="kk">
+                    <span className="tooltiptext">Solve</span>
+                  </div>
+                </div>
+                <div className="iconBtn2">
+                  <Link to="/difficulty">
+                    <PlayArrowRoundedIcon
+                      sx={{
+                        height: "7vh",
+                        width: "7vh",
+                        border: "4px solid white",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                        color: "white",
+                      }}
+                    />
+                  </Link>
+                  <div className="kk">
+                    <span className="tooltiptext">Re-Play</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

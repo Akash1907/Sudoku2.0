@@ -15,10 +15,10 @@
 }
 .loginHeading{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 .loginHeading2{
-    font-size: 5.6vh;
+    font-size: 5vh;
     letter-spacing: .2vh;
     font-family: 'Nunito', sans-serif;
     color: #6CAAD9;
@@ -89,7 +89,7 @@
     justify-content: center;
 }
 .signUp2{
-    margin-top: 5vh;
+    margin-top: 4vh;
 }
 .signUpPara{
     color: rgb(117, 117, 117);
@@ -103,4 +103,8 @@
     cursor: pointer;
     letter-spacing: .1vh;
     color: #6CAAD9;
+}
+.welcome{
+    color: black;
+    font-weight: 600;
 }

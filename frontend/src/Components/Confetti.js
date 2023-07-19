@@ -21,30 +21,7 @@ const Confetti = () => {
   }, [windowDimension]);
   return (
     <>
-      <div
-        className="congrats-container"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src="congratulation2.png"
-          alt="no img found"
-          style={{
-            fontSize: "40px",
-            position: "absolute",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: "5",
-            height: "25rem",
-            width: "35rem",
-            marginTop: "25rem",
-          }}
-        />
-      </div>
+      
       <div>
         <ReactConfetti
           width={windowDimension.width}

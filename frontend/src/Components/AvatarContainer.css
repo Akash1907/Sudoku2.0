@@ -1,0 +1,70 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6vh;
+}
+.avatarContainer2{
+    border: 2px solid #F1F3F4;
+    border-radius: 10px;
+    padding: 4vh;
+}
+.head{
+    display: flex;
+    justify-content: center;
+}
+.head2{
+    font-size: 5vh;
+    letter-spacing: .2vh;
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+}
+.userArea{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 3vh;
+}
+.userImg{
+    height: 15vh;
+    width: 15vh;
+    border-radius: 50px;
+}
+.name{
+    color: #6CAAD9;
+    font-size: 4vh;
+    font-family: 'Nunito', sans-serif;
+}
+.username{
+    font-size: 2vh;
+    font-family: 'Nunito', sans-serif;
+    margin-top: -1vh;
+    color: #ACD1EF;
+}
+.avatarP{
+    display: flex;
+    justify-content: center;
+}
+.avatarP2{
+    color: rgb(117, 117, 117);
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5vh;
+    margin-top: 1vh;
+}
+.signupBtn1{
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+}
+.already{
+    display: flex;
+    justify-content: center;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+}
+.alreadyP{
+    color: rgb(117, 117, 117);
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
+}

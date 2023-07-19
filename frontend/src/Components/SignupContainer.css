@@ -1,20 +1,22 @@
 .signup{
-    margin-top: 7vh;
-    margin-left: 20vh;
-    margin-right: 20vh;
-}
-.signup2{
-    border: 2px solid #F1F3F4;
-    border-radius: 15px;
-}
-.signup3{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10vh;
-}
-.signupContainer{
+    flex-direction: column;
     margin-top: 6vh;
+}
+.signup2{
+    border: 2px solid #F1F3F4;
+    border-radius: 10px;
+    padding: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signupContainer{
+    margin-top: 3vh;
 }
 .line{
     border-left: 2px solid #F1F3F4;
@@ -53,19 +55,17 @@
     cursor: pointer;
 }
 .signUpHead{
-    margin-top: 2vh;
-    display: flex;
-    justify-content: center;
+    margin-top: -2vh;
 }
 .signUpHead2{
-    font-size: 5.6vh;
+    font-size: 5vh;
     letter-spacing: .2vh;
     font-family: 'Nunito', sans-serif;
     color: #6CAAD9;
 }
 .nameInput{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 3vh;
 }
@@ -76,10 +76,7 @@
     margin-top: 4vh;
 }
 .signupBtn{
-    display: flex;
-    justify-content: center;
     margin-top: 5vh;
-    margin-bottom: 3vh;
 }
 .signupBtn2{
     font-family: 'Nunito', sans-serif;
@@ -108,8 +105,6 @@
     border-radius: 50px;
 }
 .alreadyAcc{
-    display: flex;
-    justify-content: center;
     margin-top: 4vh;
 }
 .alreadyAcc2{
