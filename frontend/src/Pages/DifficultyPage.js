@@ -13,7 +13,7 @@ function DifficultyPage() {
   const[difficulty, setDifficulty] = useState("");
   const  getUsers = async () => {
     await axios
-      .get("http://localhost:8000/getUsers")
+      .get("https://sudoku2-0-akash1907.vercel.app/getUsers")
       .then((response) => {
         setUserData(response.data);
         console.log(response.data);
