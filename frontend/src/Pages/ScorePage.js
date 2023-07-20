@@ -70,12 +70,12 @@ function ScorePage() {
                 <div className = 'btns'>
                 <div className="replay-btn">
                   <Link to="/difficulty">
-                    <button className="replay-btn2">REPLAY</button>
+                    <button className="replay-btn2">Replay</button>
                   </Link>
                 </div>
                 <div className="leaderboardBtn">
                   <a href="#leaderboard">
-                    <button className="leaderboardBtn2">LEADERBOARD</button>
+                    <button className="leaderboardBtn2">Leaderboard</button>
                   </a>
                 </div>
                 </div>
