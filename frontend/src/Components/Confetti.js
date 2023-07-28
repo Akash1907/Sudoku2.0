@@ -23,13 +23,13 @@ const Confetti = () => {
     <>
       
       <div>
-        <ReactConfetti
+        <ReactConfetti style={{zIndex:"100"}}
           width={windowDimension.width}
           height={windowDimension.height}
           tweenDuration={1000}
         />
       </div>
-      <AudioPlayer
+      <AudioPlayer  style={{display:"none"}}
         className="audioFile"
         autoPlay
         src={congratulations}
