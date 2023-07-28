@@ -57,7 +57,7 @@ function SignupContainer(props) {
       setOpen5(true);
     } else {
       axios
-        .post("http://localhost:8000/signupAuth", object)
+        .post("https://sudoku2-0-akash1907.vercel.app/signupAuth", object)
         .then((response) => {
           console.log(response);
           props.nextClick();

@@ -51,7 +51,7 @@ function LoginContainer(props) {
     }
     else{
       (axios
-        .post("http://localhost:8000/auth", object)
+        .post("https://sudoku2-0-akash1907.vercel.app/auth", object)
         .then((response) => {
           console.log(response);
           console.log("login Success");
