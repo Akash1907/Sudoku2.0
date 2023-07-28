@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "./LoginContainer.css";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import Slide from "@mui/material/Slide";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,7 +13,7 @@ function LoginContainer(props) {
   localStorage.clear();
   const[username, setUsername] = useState('');
   const[password, setPassword] = useState('');
-  const obj = {
+  const object = {
     username : username,
     password : password
   }
@@ -52,22 +51,21 @@ function LoginContainer(props) {
     }
     else{
       (axios
-        .post("https://sudoku2-0-akash1907.vercel.app/auth", obj)
+        .post("http://localhost:8000/auth", object)
         .then((response) => {
           console.log(response);
           console.log("login Success");
-          localStorage.setItem("username",obj.username);
+          localStorage.setItem("username",object.username);
         }).then(() => NavigateToDifficulty())
         .catch((error) => {
           console.error(error);
-          console.log("Credentials are not correct");
           setOpen4(true);
         })
       )
     }
   };
 
-  const guestClick = () =>{
+  const guestBtnClick = () =>{
     localStorage.setItem("username","guest");
     NavigateToDifficulty();
   }
@@ -145,7 +143,7 @@ function LoginContainer(props) {
               </DialogActions>
             </Dialog>
           <div className="guestBtn">
-              <button className="guestBtn2" onClick = {guestClick}>Continue as guest</button>
+              <button className="guestBtn2" onClick = {guestBtnClick}>Continue as guest</button>
           </div>
         </div>
       </div>

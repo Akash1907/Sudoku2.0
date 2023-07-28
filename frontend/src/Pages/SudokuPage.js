@@ -3,12 +3,9 @@ import Header from "../Components/Header";
 import { useNavigate, Link } from "react-router-dom";
 import "./SudokuPage.css";
 import Confetti from "../Components/Confetti";
-import GameOver from "../Components/GameOver";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
@@ -39,7 +36,7 @@ function SudokuPage(props) {
   function onInputChange(e, row, col) {
     var val = parseInt(e.target.value) || -1;
     let grid = getDeepCopy(sudokuArr);
-    if (row != undefined && col != undefined) {
+    if (row !== undefined && col !== undefined) {
       if (val === -1 || (val >= 1 && val <= 9)) {
         grid[row][col] = val;
       }
@@ -93,7 +90,7 @@ function SudokuPage(props) {
     //if col reaches 8 increase row number
     //if row reaches 8 and col reaches 8 , next will be [0, 0]
     //if col doesn't reach 8, increase col number
-    return col !== 8 ? [row, col + 1] : row != 8 ? [row + 1, 0] : [0, 0];
+    return col !== 8 ? [row, col + 1] : row !== 8 ? [row + 1, 0] : [0, 0];
   }
   //recursive fn to solve sudoku
   function solver(grid, row = 0, col = 0) {
@@ -177,7 +174,7 @@ function SudokuPage(props) {
         setMinutes(minutes + 1);
         setSeconds(0);
       }
-      if (minutes == 59) {
+      if (minutes === 59) {
         setHour(hour + 1);
         setMinutes(0);
       }
@@ -203,14 +200,14 @@ function SudokuPage(props) {
     var sec = seconds;
     if (!checkSolve) {
       score = props.score - (min * 10 + Math.floor(sec / 10));
-    } else score = 0;
+    } 
+    else score = 0;
   }
   setScore();
   var obj = {
     score: score,
   };
   const [triggerConfetti, setTriggerConfetti] = useState(false);
-  const [triggerGameOver, setTriggerGameOver] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -221,35 +218,34 @@ function SudokuPage(props) {
     if (check) {
       setOpen(true);
     } else {
-        setTriggerConfetti(!triggerConfetti);
-        if (username != "guest") {
-          setTimeout(() => {
-            event.preventDefault();
-            console.log("User-Score:", score);
-            axios
-              .post(`https://sudoku2-0-akash1907.vercel.app/setScore/${username}`, obj)
-              .then((response) => {
-                localStorage.setItem("score", score);
-                console.log(response);
-                console.log("score pushed Success");
-              })
-              .catch((error) => {
-                console.error(error);
-                console.log("Scores couldn't pushed");
-              })
-              .then(() => NavigateToScore());
-          }, 3500);
-        } else {
-          setTimeout(() => {
-            event.preventDefault();
-            console.log("User-Score:", score);
-            localStorage.setItem("score", score);
-            NavigateToScore();
-          }, 3500);
-        }
+      setTriggerConfetti(!triggerConfetti);
+      if (username !== "guest") {
+        setTimeout(() => {
+          event.preventDefault();
+          console.log("User-Score:", score);
+          axios
+            .post(`http://localhost:8000/setScore/${username}`, obj)
+            .then((response) => {
+              localStorage.setItem("score", score);
+              console.log(response);
+              console.log("score pushed Success");
+            })
+            .catch((error) => {
+              console.error(error);
+              console.log("Scores couldn't pushed");
+            })
+            .then(() => NavigateToScore());
+        }, 3500);
+      } else {
+        setTimeout(() => {
+          event.preventDefault();
+          console.log("User-Score:", score);
+          localStorage.setItem("score", score);
+          NavigateToScore();
+        }, 3500);
       }
     }
-  
+  };
 
   const navigate = useNavigate();
   const NavigateToScore = () => {
@@ -419,7 +415,6 @@ function SudokuPage(props) {
     <>
       <Header name={name} avatarUrl={avatarUrl} checkPage={checkPage} />
       {triggerConfetti && <Confetti />}
-      {triggerGameOver && <GameOver />}
       <div className="sudokuCont">
         <div className="leftSection">
           <div className="timer-container">
@@ -447,7 +442,6 @@ function SudokuPage(props) {
           </div>
         </div>
         <div className="sudoku-container">
-        
           <div className="midSection">
             <div className="App-header">
               <table>

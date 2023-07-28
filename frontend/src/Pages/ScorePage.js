@@ -8,18 +8,15 @@ import Loader from "../Components/Loader";
 function ScorePage() {
   var name = localStorage.getItem("name");
   var avatarUrl = localStorage.getItem("avatarUrl");
-  var checkPage = true;
   var score = localStorage.getItem("score");
-  var min = localStorage.getItem("minutes");
-  var sec = localStorage.getItem("seconds");
-  var difficulty = localStorage.getItem("difficulty");
-  var rankCount = 1;
-
   const [topScorer, setTopScorer] = useState({});
   const [loading, setLoading] = useState(true);
+  var checkPage = true;
+  var rankCount = 1;
+
   const getTopScorers = () => {
     axios
-      .get("https://sudoku2-0-akash1907.vercel.app/topScores")
+      .get("http://localhost:8000/topScores")
       .then((response) => {
         setTopScorer(response.data);
         setLoading(false);
@@ -55,16 +52,12 @@ function ScorePage() {
                 </div>
                 <div className="userDetails">
                   <div className="credentials">
-                    <p className="credentials2">NAME</p>
-                    {/* <p className="credentials2">TIME</p> */}
-                    <p className="credentials2">SCORE</p>
-                    {/* <p className = 'credentials2'>DIFFICULTY</p> */}
+                    <p className="credentials2">Name</p>
+                    <p className="credentials2">Score</p>
                   </div>
                   <div className="values">
                     <p className="values2">{name ? name.charAt(0).toUpperCase() + name.slice(1) : ""}</p>
-                    {/* <p className="values2">{min} : {sec}</p> */}
                     <p className="values2">{score}</p>
-                    {/* <p className = 'values2'>{difficulty}</p> */}
                   </div>
                 </div>
                 <div className = 'btns'>

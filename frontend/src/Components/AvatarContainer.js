@@ -7,6 +7,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import Loader from "../Components/Loader";
+
 
 function AvatarContainer(props) {
   const name = localStorage.getItem("name");
@@ -16,9 +18,9 @@ function AvatarContainer(props) {
   const [userAvatarUrl, setUserAvatarUrl] = useState("");
   const [score, setScore] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-
-  const obj = {
+  const object = {
     username: username,
     name: name,
     password: password,
@@ -35,37 +37,36 @@ function AvatarContainer(props) {
     setUserAvatarUrl(value);
   };
 
-  const getAvatars = () => {
+  const getAllAvatars = () => {
     axios
-      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
+      .get("http://localhost:8000/getAvatars")
       .then((response) => {
         setAvatarData(response.data);
         console.log(response);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
   useEffect(() => {
-    getAvatars();
+    getAllAvatars();
   }, []);
 
-  const collectData = async () => {
+  const collectUserData = async () => {
     if(userAvatarUrl === '')
     {
       handleClose();
     }
     else{
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app/register", obj)
+        .post("http://localhost:8000/register", object)
         .then((response) => {
           console.log(response);
-          localStorage.setItem("username", obj.username);
         })
         .then(() => NavigateToDifficulty())
         .catch((error) => {
           console.error(error);
-          alert("Username already exists");
         });
     }
   };
@@ -80,9 +81,9 @@ function AvatarContainer(props) {
           <div className="userArea">
             <div className="imgArea">
               {userAvatarUrl === "" ? (
-                <img className="userImg" src= 'https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg' />
+                <img className="userImg" src= 'https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg' alt = 'no avatar found'/>
               ) : (
-                <img className="userImg" src={userAvatarUrl} />
+                <img className="userImg" src={userAvatarUrl} alt = 'no avatar found'/>
               )}
             </div>
             <div className="userDetail">
@@ -96,19 +97,19 @@ function AvatarContainer(props) {
             </div>
             <div className="avatarcon">
               <div className="listOfImg">
-                {
-                  <>
+                {loading ? <Loader /> : 
+                  (<>
                     {avatarData?.map((i) => {
                       return (
                         <img
                           className="avatarImg"
                           id={userAvatarUrl === i.url ? "selected" : ""}
                           onClick={() => handleOptionClick(i.url)}
-                          src={i.url}
+                          src={i.url} alt = 'no avatar found'
                         />
                       );
                     })}
-                  </>
+                  </>)
                 }
               </div>
             </div>
@@ -125,7 +126,7 @@ function AvatarContainer(props) {
           </Dialog>
           </div>
           <div className="signupBtn1">
-            <button className="signupBtn2" onClick = {collectData}>Sign Up</button>
+            <button className="signupBtn2" onClick = {collectUserData}>Sign Up</button>
           </div>
         </div>
         <div className="already">

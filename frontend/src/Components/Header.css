@@ -10,6 +10,10 @@
     padding-right: 2vh;
     background-color: #ACD1EE;
 }
+#alert-dialog-title{
+    font-family: 'Nunito', sans-serif;
+    font-size: 4vh;
+}
 
 .userInfo{
     display: flex;

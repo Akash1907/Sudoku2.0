@@ -14,7 +14,7 @@ function SignupContainer(props) {
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");
 
-  const obj = {
+  const object = {
     username: username,
   };
 
@@ -57,7 +57,7 @@ function SignupContainer(props) {
       setOpen5(true);
     } else {
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app/signupAuth", obj)
+        .post("http://localhost:8000/signupAuth", object)
         .then((response) => {
           console.log(response);
           props.nextClick();

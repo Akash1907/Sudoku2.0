@@ -68,3 +68,17 @@
     letter-spacing: .1vh;
     font-family: 'Nunito', sans-serif;
 }
+.listOfImg{
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 1px solid #909090;
+    gap: 2vh;
+    background-color: white;
+    height: 25vh;
+    width: 50vh;
+    overflow-y: scroll;
+    border-radius: 8px;
+    padding: 2vh;
+    cursor: pointer;
+}

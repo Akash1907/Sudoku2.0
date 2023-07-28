@@ -11,14 +11,14 @@ function Header(props) {
   const [openAbout, setOpenAbout] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
 
-  const handleClickOpenAbout = () => {
+  const handleOpenAbout = () => {
     setOpenAbout(true);
   };
   const handleCloseAbout = () => {
     setOpenAbout(false);
   };
 
-  const handleClickOpenHelp = () => {
+  const handleOpenHelp = () => {
     setOpenHelp(true);
   };
   const handleCloseHelp = () => {
@@ -47,7 +47,7 @@ function Header(props) {
           {!props.checkPage ? <div className="buttonContainer" style={{marginLeft : "70vh"}}>
             <div className="aboutContainer">
               <div className="aboutButton">
-                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}} >
+                <Button variant="outlined" className = 'aboutBtn' onClick={handleOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}} >
                   About
                 </Button>
               </div>
@@ -58,7 +58,7 @@ function Header(props) {
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
-                  <DialogTitle id="alert-dialog-title" sx = {{ fontFamily: "Nunito"}}>{"ABOUT"}</DialogTitle>
+                  <DialogTitle id="alert-dialog-title">{"ABOUT"}</DialogTitle>
                   <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                       Sudoku (/suːˈdoʊkuː, -ˈdɒk-, sə-/; Japanese: 数独,
@@ -78,7 +78,7 @@ function Header(props) {
             </div>
             <div className="helpContainer">
               <div className="helpButton">
-                <Button variant="outlined" onClick={handleClickOpenHelp} sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px'  , textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
+                <Button variant="outlined" onClick={handleOpenHelp} sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px'  , textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
                   Help
                 </Button>
               </div>
@@ -132,7 +132,7 @@ function Header(props) {
           </div> : <div className="buttonContainer">
             <div className="aboutContainer">
               <div className="aboutButton">
-                <Button variant="outlined" className = 'aboutBtn' onClick={handleClickOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}}>
+                <Button variant="outlined" className = 'aboutBtn' onClick={handleOpenAbout} sx={{ backgroundColor : '#6CAAD9', color : 'white', fontSize : '3vh', height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "white", color : "#6CAAD9", border : "2px solid #6CAAD9", fontWeight : '500'}}}>
                   About
                 </Button>
               </div>
@@ -143,7 +143,7 @@ function Header(props) {
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
-                  <DialogTitle id="alert-dialog-title" sx = {{ fontFamily: "Bebas Neue"}}>{"ABOUT"}</DialogTitle>
+                  <DialogTitle id="alert-dialog-title" sx = {{ fontFamily: "Bebas Neue", fontSize: "10vh"}}>{"ABOUT"}</DialogTitle>
                   <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                       Sudoku (/suːˈdoʊkuː, -ˈdɒk-, sə-/; Japanese: 数独,
@@ -163,7 +163,7 @@ function Header(props) {
             </div>
             <div className="helpContainer">
               <div className="helpButton">
-                <Button variant="outlined" onClick={handleClickOpenHelp}sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
+                <Button variant="outlined" onClick={handleOpenHelp}sx={{ backgroundColor : 'white', color : '#6CAAD9', border : "2px solid #6CAAD9",  fontSize : '3vh', fontWeight : "500", height : '3rem', width : '8rem', borderRadius : '10px', textTransform: 'none', ':hover' : {backgroundColor : "#6CAAD9", color : "white"}}}>
                   Help
                 </Button>
               </div>
