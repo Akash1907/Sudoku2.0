@@ -9,12 +9,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import TimerIcon from "@mui/icons-material/Timer";
 import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import axios from "axios";
+import { useUser } from "../context/UserContext";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement<any, any> },
@@ -25,10 +25,24 @@ const Transition = React.forwardRef(function Transition(
 
 function SudokuPage(props) {
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(props.initial));
-  var name = localStorage.getItem("name");
-  var avatarUrl = localStorage.getItem("avatarUrl");
-  var username = localStorage.getItem("username");
-  var checkPage = true;
+  const [store, setStore] = useState([]);
+  const [checkSolveClick, setCheckSolveClick] = useState(false);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [hour, setHour] = useState(0);
+  const [triggerConfetti, setTriggerConfetti] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [displayHint, setDisplayHint] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isSlidingVisible, setSlidingVisible] = useState(false);
+  const { user, setUser } = useUser();
+
+  const username = user ? user.username : "";
+
+  var object = {
+    score: setScore(),
+  };
+
   function getDeepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
@@ -41,12 +55,10 @@ function SudokuPage(props) {
         grid[row][col] = val;
       }
     }
-
     setSudokuArr(grid);
     let sudoku = getDeepCopy(props.initial);
     solver(sudoku);
-    var arr = store;
-    let filteredArr = arr.filter((el) => !(el[0] === row && el[1] === col));
+    let filteredArr = store.filter((el) => !(el[0] === row && el[1] === col));
     setStore(filteredArr);
     // checkHint(e);
     setIsFocused(true);
@@ -74,6 +86,7 @@ function SudokuPage(props) {
     }
     return boxArr.indexOf(num) === -1;
   }
+
   function checkValid(grid, row, col, num) {
     //num should be unique in row, col and in the square 3x3.
     if (
@@ -92,6 +105,7 @@ function SudokuPage(props) {
     //if col doesn't reach 8, increase col number
     return col !== 8 ? [row, col + 1] : row !== 8 ? [row + 1, 0] : [0, 0];
   }
+
   //recursive fn to solve sudoku
   function solver(grid, row = 0, col = 0) {
     //if the current cell is already filled, move to next cell
@@ -123,12 +137,11 @@ function SudokuPage(props) {
     return false;
   }
 
-  const [checkSolve, setCheckSolve] = useState(false);
   function solveSudoku() {
     let sudoku = getDeepCopy(props.initial);
     solver(sudoku);
     setSudokuArr(sudoku);
-    setCheckSolve(true);
+    setCheckSolveClick(true);
     setStore([]);
   }
 
@@ -139,7 +152,7 @@ function SudokuPage(props) {
     setSeconds(0);
     setMinutes(0);
     setHour(0);
-    setCheckSolve(false);
+    setCheckSolveClick(false);
     setStore([]);
     setDisplayHint(false);
   }
@@ -163,12 +176,8 @@ function SudokuPage(props) {
     return res;
   }
 
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [hour, setHour] = useState(0);
-  var timer;
   useEffect(() => {
-    timer = setInterval(() => {
+    var timer = setInterval(() => {
       setSeconds(seconds + 1);
       if (seconds === 59) {
         setMinutes(minutes + 1);
@@ -182,77 +191,70 @@ function SudokuPage(props) {
     return () => clearInterval(timer);
   });
 
-  let check;
   function clickSubmit() {
     let sudoku = getDeepCopy(props.initial);
     solver(sudoku);
     let compare = compareSudoku(sudokuArr, sudoku);
     if (!compare.isComplete) {
-      check = true;
+      return true;
     } else {
-      check = false;
+      return false;
     }
   }
 
-  var score;
   function setScore() {
-    var min = minutes;
-    var sec = seconds;
-    if (!checkSolve) {
-      score = props.score - (min * 10 + Math.floor(sec / 10));
-    } 
-    else score = 0;
+    let score = 0;
+    if (!checkSolveClick) {
+      score = props.score - (minutes * 10 + Math.floor(seconds / 10));
+    }
+    return score;
   }
-  setScore();
-  var obj = {
-    score: score,
-  };
-  const [triggerConfetti, setTriggerConfetti] = useState(false);
-  const [open, setOpen] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleSubmit = (event) => {
-    clickSubmit();
     incorrectInput();
-    if (check) {
+    if (clickSubmit()) {
       setOpen(true);
     } else {
       setTriggerConfetti(!triggerConfetti);
       if (username !== "guest") {
         setTimeout(() => {
           event.preventDefault();
-          console.log("User-Score:", score);
+          console.log("User-Score:", setScore());
           axios
-            .post(`https://sudoku2-0-akash1907.vercel.app/setScore/${username}`, obj)
+            .post(`http://localhost:8000/setScore/${username}`, object)
             .then((response) => {
-              localStorage.setItem("score", score);
+              setScore();
+              localStorage.setItem("score", setScore());
+              console.log(user);
               console.log(response);
-              console.log("score pushed Success");
+              console.log("Score Pushed Successfully");
             })
             .catch((error) => {
               console.error(error);
               console.log("Scores couldn't pushed");
             })
-            .then(() => NavigateToScore());
+            .then(() => NavigateToScorePage());
         }, 3500);
       } else {
         setTimeout(() => {
           event.preventDefault();
-          console.log("User-Score:", score);
-          localStorage.setItem("score", score);
-          NavigateToScore();
+          console.log("User-Score:", setScore());
+          localStorage.setItem("score", setScore());
+          NavigateToScorePage();
         }, 3500);
       }
     }
   };
 
   const navigate = useNavigate();
-  const NavigateToScore = () => {
+  const NavigateToScorePage = () => {
     navigate("/scores");
   };
 
-  const [store, setStore] = useState([]);
   function incorrectInput() {
     let sudoku = getDeepCopy(props.initial);
     solver(sudoku);
@@ -267,15 +269,16 @@ function SudokuPage(props) {
       }
     }
   }
+
   function checkWrong(row, col) {
     let containsElement = store.some((el) => el[0] === row && el[1] === col);
     return containsElement;
   }
 
-  const [displayHint, setDisplayHint] = useState(false);
   function clickHint() {
     setDisplayHint(!displayHint);
   }
+
   function checkHint(row, col) {
     var mainOut = [];
     var colArray = [];
@@ -292,81 +295,63 @@ function SudokuPage(props) {
       if (row <= 2 && col <= 2) {
         for (let i = 0; i < 3; i++) {
           for (let j = 0; j < 3; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row <= 2 && col > 2 && col < 6) {
         for (let i = 0; i < 3; i++) {
           for (let j = 3; j < 6; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row <= 2 && col > 5) {
         for (let i = 0; i < 3; i++) {
           for (let j = 6; j < 9; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 2 && row < 6 && col <= 2) {
         for (let i = 3; i < 6; i++) {
           for (let j = 0; j < 3; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 2 && row < 6 && col > 2 && col < 6) {
         for (let i = 3; i < 6; i++) {
           for (let j = 3; j < 6; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 2 && row < 6 && col > 5) {
         for (let i = 3; i < 6; i++) {
           for (let j = 6; j < 9; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 5 && col <= 2) {
         for (let i = 6; i < 9; i++) {
           for (let j = 0; j < 3; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 5 && col > 2 && col < 6) {
         for (let i = 6; i < 9; i++) {
           for (let j = 3; j < 6; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
       if (row > 5 && col > 5) {
         for (let i = 6; i < 9; i++) {
           for (let j = 6; j < 9; j++) {
-            {
-              regArray.push(sudokuArr[i][j]);
-            }
+            regArray.push(sudokuArr[i][j]);
           }
         }
       }
@@ -381,7 +366,7 @@ function SudokuPage(props) {
             flag = true;
           }
         }
-        if (flag != true) {
+        if (flag !== true) {
           mainOut.push(i + 1);
         }
       }
@@ -389,7 +374,6 @@ function SudokuPage(props) {
     return mainOut;
   }
 
-  const [isFocused, setIsFocused] = useState(false);
   const myStyles = {
     1: { left: "0px", zIndex: 12 },
     2: { left: "20px", zIndex: 12 },
@@ -406,44 +390,32 @@ function SudokuPage(props) {
     setIsFocused(false);
   }
 
-  const [isSlidingVisible, setSlidingVisible] = useState(false);
   const handleSlideButtonClick = () => {
     setSlidingVisible(!isSlidingVisible);
   };
 
   return (
     <>
-      <Header name={name} avatarUrl={avatarUrl} checkPage={checkPage} />
       {triggerConfetti && <Confetti />}
-      <div className="sudokuCont">
-        <div className="leftSection">
-          <div className="timer-container">
-            <div className="timer">
-              <TimerIcon
-                sx={{ height: "3rem", width: "3rem", color: "#6CAAD9" }}
-                className="timer-icon"
-              />
-              <div className="time">
-                <p className="time-p">{hour < 10 ? "0" + hour : hour}</p>
-              </div>
-              <div className="midDot">:</div>
-              <div className="time">
-                <p className="time-p">
-                  {minutes < 10 ? "0" + minutes : minutes}
-                </p>
-              </div>
-              <div className="midDot">:</div>
-              <div className="time">
-                <p className="time-p">
-                  {seconds < 10 ? "0" + seconds : seconds}
-                </p>
-              </div>
+      <div className="sudokuContainer">
+        <div className="timerSection">
+          <div className="timer">
+            <div className="time">
+              <p className="time-p">{hour < 10 ? "0" + hour : hour}</p>
+            </div>
+            <div className="midDot">:</div>
+            <div className="time">
+              <p className="time-p">{minutes < 10 ? "0" + minutes : minutes}</p>
+            </div>
+            <div className="midDot">:</div>
+            <div className="time">
+              <p className="time-p">{seconds < 10 ? "0" + seconds : seconds}</p>
             </div>
           </div>
         </div>
-        <div className="sudoku-container">
-          <div className="midSection">
-            <div className="App-header">
+        <div className="sudokuSection">
+          <div className="sudoku">
+            <div className="sudokuTable">
               <table>
                 <tbody>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
@@ -516,112 +488,25 @@ function SudokuPage(props) {
                 </tbody>
               </table>
             </div>
-            <div className="submit-btn">
-              <Button
-                variant="outlined"
-                onClick={handleSubmit}
-                sx={{
-                  marginTop: "2vh",
-                  fontFamily: "Nunito",
-                  backgroundColor: "#6CAAD9",
-                  color: "white",
-                  height: "6vh",
-                  width: "63vh",
-                  fontSize: "2rem",
-                  borderRadius: "10px",
-                  "&:hover": {
-                    background: "white",
-                    color: "#6CAAD9",
-                    border: "4px solid #6CAAD9",
-                    fontWeight: "400",
-                  },
-                }}
+            <div className="slidingContainer">
+              <button
+                className={
+                  isSlidingVisible ? "optionsBtnOpen" : "optionsBtnClose"
+                }
+                onClick={handleSlideButtonClick}
               >
-                SUBMIT
-              </Button>
-              <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-              >
-                <DialogTitle>
-                  {"Your SUDOKU is either not completed or wrong. Keep Trying!"}
-                </DialogTitle>
-                <DialogActions>
-                  <Button onClick={handleClose}>OKAY</Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </div>
-          <div className="slidingContainer">
-            <button
-              className={
-                isSlidingVisible ? "optionsBtnOpen" : "optionsBtnClose"
-              }
-              onClick={handleSlideButtonClick}
-            >
-              OPTIONS
-            </button>
+                <p className = 'options'>OPTIONS</p>
+              </button>
 
-            <div
-              className={
-                isSlidingVisible ? "rightSectionOpen" : "rightSectionClose"
-              }
-            >
-              <div className="iconBtn">
-                <div className="iconBtn2">
-                  <TipsAndUpdatesRoundedIcon
-                    onClick={clickHint}
-                    sx={{
-                      height: "7vh",
-                      width: "7vh",
-                      border: "4px solid white",
-                      borderRadius: "15px",
-                      cursor: "pointer",
-                      color: "white",
-                    }}
-                  />
-                  <div className="kk">
-                    <span className="tooltiptext">Hint</span>
-                  </div>
-                </div>
-                <div className="iconBtn2">
-                  <RestartAltRoundedIcon
-                    onClick={resetSudoku}
-                    sx={{
-                      height: "7vh",
-                      width: "7vh",
-                      border: "4px solid white",
-                      borderRadius: "15px",
-                      cursor: "pointer",
-                      color: "white",
-                    }}
-                  />
-                  <div className="kk">
-                    <span className="tooltiptext">Reset</span>
-                  </div>
-                </div>
-                <div className="iconBtn2">
-                  <CheckCircleRoundedIcon
-                    onClick={solveSudoku}
-                    sx={{
-                      height: "7vh",
-                      width: "7vh",
-                      border: "4px solid white",
-                      borderRadius: "15px",
-                      cursor: "pointer",
-                      color: "white",
-                    }}
-                  />
-                  <div className="kk">
-                    <span className="tooltiptext">Solve</span>
-                  </div>
-                </div>
-                <div className="iconBtn2">
-                  <Link to="/difficulty">
-                    <PlayArrowRoundedIcon
+              <div
+                className={
+                  isSlidingVisible ? "rightSectionOpen" : "rightSectionClose"
+                }
+              >
+                <div className="iconBtn">
+                  <div className="iconBtn2">
+                    <TipsAndUpdatesRoundedIcon
+                      onClick={clickHint}
                       sx={{
                         height: "7vh",
                         width: "7vh",
@@ -631,15 +516,102 @@ function SudokuPage(props) {
                         color: "white",
                       }}
                     />
-                  </Link>
-                  <div className="kk">
-                    <span className="tooltiptext">Re-Play</span>
+                    <div className="kk">
+                      <span className="tooltiptext">Hint</span>
+                    </div>
+                  </div>
+                  <div className="iconBtn2">
+                    <RestartAltRoundedIcon
+                      onClick={resetSudoku}
+                      sx={{
+                        height: "7vh",
+                        width: "7vh",
+                        border: "4px solid white",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                        color: "white",
+                      }}
+                    />
+                    <div className="kk">
+                      <span className="tooltiptext">Reset</span>
+                    </div>
+                  </div>
+                  <div className="iconBtn2">
+                    <CheckCircleRoundedIcon
+                      onClick={solveSudoku}
+                      sx={{
+                        height: "7vh",
+                        width: "7vh",
+                        border: "4px solid white",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                        color: "white",
+                      }}
+                    />
+                    <div className="kk">
+                      <span className="tooltiptext">Solve</span>
+                    </div>
+                  </div>
+                  <div className="iconBtn2">
+                    <Link to="/difficulty">
+                      <PlayArrowRoundedIcon
+                        sx={{
+                          height: "7vh",
+                          width: "7vh",
+                          border: "4px solid white",
+                          borderRadius: "15px",
+                          cursor: "pointer",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                    <div className="kk">
+                      <span className="tooltiptext">Re-Play</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          </div>
+          <div className="submitSection">
+            <Button
+              variant="outlined"
+              onClick={handleSubmit}
+              sx={{
+                
+                fontFamily: "Nunito",
+                backgroundColor: "#6CAAD9",
+                color: "white",
+                height: "6vh",
+                width: "63vh",
+                fontSize: "2rem",
+                borderRadius: "10px",
+                "&:hover": {
+                  background: "white",
+                  color: "#6CAAD9",
+                  border: "4px solid #6CAAD9",
+                  fontWeight: "400",
+                },
+              }}
+            >
+              SUBMIT
+            </Button>
+            <Dialog
+              open={open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle>
+                {"Your SUDOKU is either not completed or wrong. Keep Trying!"}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose}>OKAY</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
       </div>
     </>
   );

@@ -6,17 +6,18 @@ import "./ScorePage.css";
 import Loader from "../Components/Loader";
 
 function ScorePage() {
-  var name = localStorage.getItem("name");
-  var avatarUrl = localStorage.getItem("avatarUrl");
-  var score = localStorage.getItem("score");
+  const name = localStorage.getItem('name');
+  const avatarUrl = localStorage.getItem('avatarUrl');
+  const score = localStorage.getItem('score');
+
   const [topScorer, setTopScorer] = useState({});
   const [loading, setLoading] = useState(true);
-  var checkPage = true;
   var rankCount = 1;
+
 
   const getTopScorers = () => {
     axios
-      .get("https://sudoku2-0-akash1907.vercel.app/topScores")
+      .get("http://localhost:8000/topScores")
       .then((response) => {
         setTopScorer(response.data);
         setLoading(false);
@@ -36,7 +37,6 @@ function ScorePage() {
         <Loader />
       ) : (
         <>
-          <Header name={name} avatarUrl={avatarUrl} checkPage={checkPage} />
           <div className="scoreboard">
             <div className="scoreboardContainer">
               <div className="insideScore">

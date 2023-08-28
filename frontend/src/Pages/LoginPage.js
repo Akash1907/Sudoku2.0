@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import LoginContainer from "../Components/LoginContainer";
-import Header from "../Components/Header";
 import SignupContainer from "../Components/SignupContainer";
 import AvatarContainer from "../Components/AvatarContainer";
 
+
 function LoginPage() {
-  const [signUpPopup, setSignUpPopup] = useState(false);
-  const [avatarPopup, setAvatarPopup] = useState(false);
-  var checkPage = false;
+  const [signUpContainerPopup, setSignUpContainerPopup] = useState(false);
+  const [avatarContainerPopup, setAvatarContainerPopup] = useState(false);
 
   function signUpClick() {
-    setSignUpPopup(true);
+    setSignUpContainerPopup(true);
   }
   function loginClick() {
-    setAvatarPopup(false);
-    setSignUpPopup(false);
+    setAvatarContainerPopup(false);
+    setSignUpContainerPopup(false);
   }
   function nextClick() {
-    setAvatarPopup(true);
-    setSignUpPopup(false);
+    setAvatarContainerPopup(true);
+    setSignUpContainerPopup(false);
   }
 
   return (
     <>
-      <Header checkPage={checkPage} />
-      {!signUpPopup && !avatarPopup ? (
+      {/* <Header checkPage={checkPage} /> */}
+      {!signUpContainerPopup && !avatarContainerPopup ? (
         <LoginContainer click={signUpClick} />
       ) : (
         ""
       )}
-      {signUpPopup && !avatarPopup ? (
+      {signUpContainerPopup && !avatarContainerPopup ? (
         <SignupContainer
           loginClick={loginClick} 
           nextClick={nextClick}
@@ -37,10 +36,9 @@ function LoginPage() {
       ) : (
         ""
       )}
-      {!signUpPopup && avatarPopup ? (
+      {!signUpContainerPopup && avatarContainerPopup ? (
         <AvatarContainer
           loginClick = {loginClick}
-          
         />
       ) : (
         ""

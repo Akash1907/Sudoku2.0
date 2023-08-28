@@ -13,17 +13,16 @@ function SignupContainer(props) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");
-
-  const object = {
-    username: username,
-  };
-
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const [open5, setOpen5] = useState(false);
   const [open6, setOpen6] = useState(false);
+
+  const object = {
+    username: username,
+  };
 
   const handleClose1 = () => {
     setOpen1(false);
@@ -57,13 +56,13 @@ function SignupContainer(props) {
       setOpen5(true);
     } else {
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app/signupAuth", object)
+        .post("http://localhost:8000/signupAuth", object)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+          localStorage.setItem('name', name);
+          localStorage.setItem('username', username);
+          localStorage.setItem('password', password);
           props.nextClick();
-          localStorage.setItem("username", username);
-          localStorage.setItem("name", name);
-          localStorage.setItem("password", password);
         })
         .catch((error) => {
           console.error(error);
@@ -95,7 +94,7 @@ function SignupContainer(props) {
                   </div>
                   <div className="nmeInput">
                     <TextField
-                      id="outlined-error-helper-text"
+                      id="outlined-basic"
                       label="Name"
                       variant="outlined"
                       value={name}

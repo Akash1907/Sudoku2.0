@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import DifficultyPage from "./Pages/DifficultyPage";
 import LoginPage from "./Pages/LoginPage";
 import SudokuPage from "./Pages/SudokuPage";
 import ScorePage from "./Pages/ScorePage";
-import Loader from "./Components/Loader"
+import Header from "./Components/Header";
+// import State from "./ContextAPI/State";
+// import Context from "./ContextAPI/Context"
+import { UserProvider } from './context/UserContext';
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App () {
@@ -47,9 +51,13 @@ function App () {
   const scoreEasy = 500;
   const scoreMed = 600;
   const scoreHard = 700;
+  
+  // const a = useContext(Context);
 
 return (
-  <div className="App">
+  <UserProvider>
+  
+    <Header />
     <Router>
       <Routes>
         <Route path= "/" element = {<LoginPage/>} />
@@ -69,8 +77,7 @@ return (
           <Route path="/scores" element={<ScorePage />} />
       </Routes>
     </Router>
-    {/* <Loader /> */}
-  </div>
+  </UserProvider>
 );
 }
 export default App;

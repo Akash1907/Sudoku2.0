@@ -8,28 +8,28 @@ const Avatar = require("./database/avatars");
 var users = [];
 const Joi = require("joi");
 
-// const init = async () => {
-//   const server = Hapi.server({
-//     port: 8000,
-//     host: "localhost",
-//     routes: {
-//       cors: {
-//         origin: ["*"], // an array of origins or 'ignore'
-//         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
-//       },
-//     },
-//   });
-
 const init = async () => {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: 8000,
+    host: "localhost",
     routes: {
       cors: {
-        origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
+        origin: ["*"], // an array of origins or 'ignore'
         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
       },
     },
   });
+
+// const init = async () => {
+//   const server = Hapi.server({
+//     port: process.env.PORT || 3000,
+//     routes: {
+//       cors: {
+//         origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
+//         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
+//       },
+//     },
+//   });
 
   
 
@@ -74,14 +74,15 @@ const init = async () => {
       const { username, password } = request.payload;
       let person = request.query;
       let result = await User.find(person).lean();
-      // users = result;
       console.log(result);
       const existingUser = result.find(
         (user) => user.username === username && user.password === password
       );
       if (existingUser) {
         console.log("login credentials", request.payload);
-        return h.response("Logged in successfully").code(200);
+
+        return h.response(existingUser).code(200);
+        console.log("Logged in successfully");
       }
       return h.response("Please enter correct credentials").code(409);
     },

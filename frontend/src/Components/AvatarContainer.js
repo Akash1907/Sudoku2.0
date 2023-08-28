@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Loader from "../Components/Loader";
+import { useUser } from "../context/UserContext";
 
 
 function AvatarContainer(props) {
@@ -28,6 +29,8 @@ function AvatarContainer(props) {
     score: score,
   };
 
+  const { setUser } = useUser();
+
   const navigate = useNavigate();
   const NavigateToDifficulty = () => {
     navigate("/difficulty");
@@ -39,7 +42,7 @@ function AvatarContainer(props) {
 
   const getAllAvatars = () => {
     axios
-      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
+      .get("http://localhost:8000/getAvatars")
       .then((response) => {
         setAvatarData(response.data);
         console.log(response);
@@ -60,9 +63,15 @@ function AvatarContainer(props) {
     }
     else{
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app/register", object)
+        .post("http://localhost:8000/register", object)
         .then((response) => {
           console.log(response);
+          setUser({
+            username : localStorage.getItem("username"),
+            name : localStorage.getItem("name"),
+            avatarUrl : userAvatarUrl
+          })
+          localStorage.setItem('avatarUrl', userAvatarUrl);
         })
         .then(() => NavigateToDifficulty())
         .catch((error) => {

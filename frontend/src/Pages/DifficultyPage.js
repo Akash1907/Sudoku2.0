@@ -4,37 +4,12 @@ import "./DifficultyPage.css";
 import Header from "../Components/Header";
 import axios from "axios";
 
-function DifficultyPage() {
-  var username = localStorage.getItem("username");
-  const [currentUser, setCurrentUser] = useState({});
-  const getUsers = async () => {
-    await axios
-      .get("https://sudoku2-0-akash1907.vercel.app/getUsers")
-      .then((response) => {
-        console.log(response.data);
-        const user = response.data.find((obj) => {
-          return obj.username === username;
-        });
-        setCurrentUser(user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
 
-  var checkPage = true;
-  localStorage.setItem("name", currentUser.name);
-  localStorage.setItem("avatarUrl", currentUser.avatarUrl);
+function DifficultyPage() {
+  const [currentUser, setCurrentUser] = useState({});
+ 
   return (
     <>
-      <Header
-        name={currentUser.name}
-        avatarUrl={currentUser.avatarUrl}
-        checkPage={checkPage}
-      />
       <div className="diffLevel">
         <div className="diffLevel2">
           <div className="diffHead">
