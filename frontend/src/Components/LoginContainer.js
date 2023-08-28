@@ -49,7 +49,7 @@ function LoginContainer(props) {
       setOpen3(true);
     } else {
       axios
-        .post("http://localhost:8000/auth", object)
+        .post("https://sudoku-frontend.vercel.app/auth", object)
         .then((response) => {
           console.log(response.data);
           console.log("login Success");

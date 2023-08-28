@@ -225,7 +225,7 @@ function SudokuPage(props) {
           event.preventDefault();
           console.log("User-Score:", setScore());
           axios
-            .post(`http://localhost:8000/setScore/${username}`, object)
+            .post(`https://sudoku-frontend.vercel.app/setScore/${username}`, object)
             .then((response) => {
               setScore();
               localStorage.setItem("score", setScore());

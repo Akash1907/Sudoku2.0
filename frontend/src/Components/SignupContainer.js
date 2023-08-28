@@ -56,7 +56,7 @@ function SignupContainer(props) {
       setOpen5(true);
     } else {
       axios
-        .post("http://localhost:8000/signupAuth", object)
+        .post("https://sudoku-frontend.vercel.app/signupAuth", object)
         .then((response) => {
           console.log(response.data);
           localStorage.setItem('name', name);

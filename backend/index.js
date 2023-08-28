@@ -8,28 +8,28 @@ const Avatar = require("./database/avatars");
 var users = [];
 const Joi = require("joi");
 
-const init = async () => {
-  const server = Hapi.server({
-    port: 8000,
-    host: "localhost",
-    routes: {
-      cors: {
-        origin: ["*"], // an array of origins or 'ignore'
-        credentials: true, // boolean - 'Access-Control-Allow-Credentials'
-      },
-    },
-  });
-
 // const init = async () => {
 //   const server = Hapi.server({
-//     port: process.env.PORT || 3000,
+//     port: 8000,
+//     host: "localhost",
 //     routes: {
 //       cors: {
-//         origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
+//         origin: ["*"], // an array of origins or 'ignore'
 //         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
 //       },
 //     },
 //   });
+
+const init = async () => {
+  const server = Hapi.server({
+    port: process.env.PORT || 3000,
+    routes: {
+      cors: {
+        origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
+        credentials: true, // boolean - 'Access-Control-Allow-Credentials'
+      },
+    },
+  });
 
   
 
