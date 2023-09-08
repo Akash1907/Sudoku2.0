@@ -1,0 +1,24 @@
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5vh;
+  }
+  .time {
+    border: 2px solid #6caad9;
+    border-radius: 10px;
+    height: 6vh;
+    width: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6caad9;
+    background-color: #acd1ee;
+  }
+  .midDot {
+    color: #6caad9;
+    font-size: 4vh;
+  }
+  .time-p {
+    font-size: 3.5vh;
+  }

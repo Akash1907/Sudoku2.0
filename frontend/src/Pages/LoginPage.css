@@ -7,7 +7,6 @@
     margin-top: 6vh;  
 }
 .loginContainer2{
-    /* background-color: #f5f5f5; */
     padding: 3vh;
     border-radius: 10px;
     padding-bottom: 6vh; 
@@ -38,7 +37,7 @@
     letter-spacing: .1vh;
 
 }
-.signinBtn{
+.loginBtn{
     display: flex;
     justify-content: center;
     margin-top: 6vh;
@@ -48,7 +47,7 @@
     justify-content: center;
     margin-top: 3vh;
 }
-.signinBtn2{
+.loginBtn2{
     height: 5vh;
     width: 51vh;
     font-size: 2vh;
@@ -60,7 +59,7 @@
     letter-spacing: .1vh;
     border: none;
 }
-.signinBtn2:hover{
+.loginBtn2:hover{
     color: black;
     background-color: white;
     border: 1px solid #6CAAD9;
@@ -87,22 +86,23 @@
 .signUp{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .signUp2{
     margin-top: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: .1vh;
 }
 .signUpPara{
     color: rgb(117, 117, 117);
-    letter-spacing: .1vh;
-    font-family: 'Nunito', sans-serif;
 }
-.signUpBtn{
-    border: none;
-    background-color: white;
-    font-size: 2.3vh;
-    cursor: pointer;
-    letter-spacing: .1vh;
+.navigateToSignup{
     color: #6CAAD9;
+    font-weight: 600;
+    margin-left: 1vh;
 }
 .welcome{
     color: black;

@@ -50,6 +50,9 @@
     font-family: 'Nunito', sans-serif;
     color: #6CAAD9;
 }
+.headCutout{
+    color: black;
+}
 .nameInput{
     display: flex;
     /* justify-content: center; */
@@ -93,11 +96,14 @@
 }
 .alreadyAcc{
     margin-top: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
 }
 .alreadyAcc2{
     color: rgb(117, 117, 117);
-    letter-spacing: .1vh;
-    font-family: 'Nunito', sans-serif;
 }
 .loginBtn{
     border: none;
@@ -106,4 +112,9 @@
     cursor: pointer;
     letter-spacing: .1vh;
     color: #6CAAD9;
+}
+.navigateToLogin{
+    color: #6CAAD9;
+    margin-left: 1vh;
+    font-weight: 600;
 }

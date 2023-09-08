@@ -25,8 +25,8 @@ const init = async () => {
     port: process.env.PORT || 3000,
     routes: {
       cors: {
-        origin: ['https://sudoku-frontend.vercel.app'], // Update with your frontend's URL
-        credentials: true, // boolean - 'Access-Control-Allow-Credentials'
+        origin: ['https://sudoku-frontend.vercel.app'],
+        credentials: true,
       },
     },
   });
@@ -37,7 +37,7 @@ const init = async () => {
     method: "GET",
     path: "/",
     handler: (request, h) => {
-      return "kaam kar rha h";
+      return "App is working";
     },
   });
 

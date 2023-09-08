@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./AvatarContainer.css";
+import "./AvatarPage.css";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,7 +11,7 @@ import Loader from "../Components/Loader";
 import { useUser } from "../context/UserContext";
 
 
-function AvatarContainer(props) {
+function AvatarPage(props) {
   const name = localStorage.getItem("name");
   const username = localStorage.getItem("username");
   const password = localStorage.getItem('password');
@@ -87,6 +87,9 @@ function AvatarContainer(props) {
     <div className="mainContainer">
       <div className="avatarContainer">
         <div className="avatarContainer2">
+          <div className = 'heading'>
+            <p className = 'avatarPageHeading'><span className = 'headCutout'>Sign</span> Up</p>
+          </div>
           <div className="userArea">
             <div className="imgArea">
               {userAvatarUrl === "" ? (
@@ -135,20 +138,23 @@ function AvatarContainer(props) {
           </Dialog>
           </div>
           <div className="signupBtn1">
-            <button className="signupBtn2" onClick = {collectUserData}>Sign Up</button>
+            <Link to = '/signup' style = {{textDecoration : "none"}}>
+            <button className="avatarPageBtns">Back</button>
+            </Link>
+            <button className='avatarPageBtns' onClick = {collectUserData}>Submit</button>
           </div>
         </div>
         <div className="already">
           <p className="alreadyP">
             Already have an account?
-            <button className="loginBtn" onClick={props.loginClick}>
-              Log In
-            </button>
           </p>
+          <Link to="/" style={{ textDecoration: "none"}}>
+              <p className="navigateToLogin">Log In</p>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default AvatarContainer;
+export default AvatarPage;

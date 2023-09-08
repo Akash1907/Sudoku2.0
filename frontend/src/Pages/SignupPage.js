@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import "./SignupContainer.css";
+import "./SignupPage.css";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import {useNavigate, Link } from "react-router-dom";
 
-function SignupContainer(props) {
+
+function SignupPage() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -62,7 +64,7 @@ function SignupContainer(props) {
           localStorage.setItem('name', name);
           localStorage.setItem('username', username);
           localStorage.setItem('password', password);
-          props.nextClick();
+          NavigateToAvatarPage();
         })
         .catch((error) => {
           console.error(error);
@@ -70,13 +72,17 @@ function SignupContainer(props) {
         });
     }
   };
+  const navigate = useNavigate();
+  const NavigateToAvatarPage = () => {
+    navigate("/choseAvatar");
+  };
 
   return (
     <>
       <div className="signup">
         <div className="signup2">
           <div className="signUpHead">
-            <p className="signUpHead2">Sign Up</p>
+            <p className="signUpHead2"><span className = 'headCutout'>Sign</span> Up</p>
           </div>
           <div className="signup3">
             <div className="signupContainer">
@@ -200,15 +206,15 @@ function SignupContainer(props) {
         </div>
         <div className="alreadyAcc">
           <p className="alreadyAcc2">
-            Already have an account?{" "}
-            <button className="loginBtn" onClick={props.loginClick}>
-              Log In
-            </button>
+            Already have an account?
           </p>
+          <Link to="/" style={{ textDecoration: "none"}}>
+              <p className="navigateToLogin">Log In</p>
+          </Link>
         </div>
       </div>
     </>
   );
 }
 
-export default SignupContainer;
+export default SignupPage;

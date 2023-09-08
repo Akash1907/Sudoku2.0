@@ -1,43 +1,35 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Components/Header";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SudokuPage.css";
 import Confetti from "../Components/Confetti";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
-import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import Timer from "../Components/Timer";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import SubmitBtn from "../Components/SubmitBtn";
+import HintBtn from "../Components/HintBtn";
+import ResetBtn from "../Components/ResetBtn";
+import SolveBtn from "../Components/SolveBtn";
+import ReplayBtn from "../Components/ReplayBtn";
 
 function SudokuPage(props) {
   const [sudokuArr, setSudokuArr] = useState(getDeepCopy(props.initial));
   const [store, setStore] = useState([]);
   const [checkSolveClick, setCheckSolveClick] = useState(false);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [hour, setHour] = useState(0);
   const [triggerConfetti, setTriggerConfetti] = useState(false);
-  const [open, setOpen] = useState(false);
   const [displayHint, setDisplayHint] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isSlidingVisible, setSlidingVisible] = useState(false);
-  const { user, setUser } = useUser();
+  const {user, setUser} = useUser();
+  const [open, setOpen] = useState(false);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [hour, setHour] = useState(0);
 
   const username = user ? user.username : "";
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   var object = {
     score: setScore(),
@@ -149,15 +141,16 @@ function SudokuPage(props) {
   function resetSudoku() {
     let sudoku = getDeepCopy(props.initial);
     setSudokuArr(sudoku);
-    setSeconds(0);
-    setMinutes(0);
-    setHour(0);
     setCheckSolveClick(false);
     setStore([]);
     setDisplayHint(false);
+    // setCheckResetClick((prev) => !prev);
+    setMinutes(0);
+    setSeconds(0);
+    setHour(0);
   }
 
-  //funtion to compare sudoku
+  //function to compare sudoku
   function compareSudoku(currentSudoku, solvedSudoku) {
     let res = {
       isComplete: true,
@@ -176,6 +169,17 @@ function SudokuPage(props) {
     return res;
   }
 
+  function clickSubmit() {
+    let sudoku = getDeepCopy(props.initial);
+    solver(sudoku);
+    let compare = compareSudoku(sudokuArr, sudoku);
+    if (!compare.isComplete) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   useEffect(() => {
     var timer = setInterval(() => {
       setSeconds(seconds + 1);
@@ -191,17 +195,6 @@ function SudokuPage(props) {
     return () => clearInterval(timer);
   });
 
-  function clickSubmit() {
-    let sudoku = getDeepCopy(props.initial);
-    solver(sudoku);
-    let compare = compareSudoku(sudokuArr, sudoku);
-    if (!compare.isComplete) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   function setScore() {
     let score = 0;
     if (!checkSolveClick) {
@@ -209,10 +202,6 @@ function SudokuPage(props) {
     }
     return score;
   }
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleSubmit = (event) => {
     incorrectInput();
@@ -225,7 +214,7 @@ function SudokuPage(props) {
           event.preventDefault();
           console.log("User-Score:", setScore());
           axios
-            .post(`https://sudoku-frontend.vercel.app/setScore/${username}`, object)
+            .post(`https://sudoku-frontend.vercel.app/${username}`, object)
             .then((response) => {
               setScore();
               localStorage.setItem("score", setScore());
@@ -398,21 +387,7 @@ function SudokuPage(props) {
     <>
       {triggerConfetti && <Confetti />}
       <div className="sudokuContainer">
-        <div className="timerSection">
-          <div className="timer">
-            <div className="time">
-              <p className="time-p">{hour < 10 ? "0" + hour : hour}</p>
-            </div>
-            <div className="midDot">:</div>
-            <div className="time">
-              <p className="time-p">{minutes < 10 ? "0" + minutes : minutes}</p>
-            </div>
-            <div className="midDot">:</div>
-            <div className="time">
-              <p className="time-p">{seconds < 10 ? "0" + seconds : seconds}</p>
-            </div>
-          </div>
-        </div>
+        <Timer minutes={minutes} hour={hour} seconds={seconds} />
         <div className="sudokuSection">
           <div className="sudoku">
             <div className="sudokuTable">
@@ -495,7 +470,7 @@ function SudokuPage(props) {
                 }
                 onClick={handleSlideButtonClick}
               >
-                <p className = 'options'>OPTIONS</p>
+                <p className="options">OPTIONS</p>
               </button>
 
               <div
@@ -504,114 +479,20 @@ function SudokuPage(props) {
                 }
               >
                 <div className="iconBtn">
-                  <div className="iconBtn2">
-                    <TipsAndUpdatesRoundedIcon
-                      onClick={clickHint}
-                      sx={{
-                        height: "7vh",
-                        width: "7vh",
-                        border: "4px solid white",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        color: "white",
-                      }}
-                    />
-                    <div className="kk">
-                      <span className="tooltiptext">Hint</span>
-                    </div>
-                  </div>
-                  <div className="iconBtn2">
-                    <RestartAltRoundedIcon
-                      onClick={resetSudoku}
-                      sx={{
-                        height: "7vh",
-                        width: "7vh",
-                        border: "4px solid white",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        color: "white",
-                      }}
-                    />
-                    <div className="kk">
-                      <span className="tooltiptext">Reset</span>
-                    </div>
-                  </div>
-                  <div className="iconBtn2">
-                    <CheckCircleRoundedIcon
-                      onClick={solveSudoku}
-                      sx={{
-                        height: "7vh",
-                        width: "7vh",
-                        border: "4px solid white",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        color: "white",
-                      }}
-                    />
-                    <div className="kk">
-                      <span className="tooltiptext">Solve</span>
-                    </div>
-                  </div>
-                  <div className="iconBtn2">
-                    <Link to="/difficulty">
-                      <PlayArrowRoundedIcon
-                        sx={{
-                          height: "7vh",
-                          width: "7vh",
-                          border: "4px solid white",
-                          borderRadius: "15px",
-                          cursor: "pointer",
-                          color: "white",
-                        }}
-                      />
-                    </Link>
-                    <div className="kk">
-                      <span className="tooltiptext">Re-Play</span>
-                    </div>
-                  </div>
+                  <HintBtn clickHint={clickHint} />
+                  <ResetBtn resetSudoku={resetSudoku} />
+                  <SolveBtn solveSudoku={solveSudoku} />
+                  <ReplayBtn />
                 </div>
               </div>
             </div>
           </div>
-          </div>
-          <div className="submitSection">
-            <Button
-              variant="outlined"
-              onClick={handleSubmit}
-              sx={{
-                
-                fontFamily: "Nunito",
-                backgroundColor: "#6CAAD9",
-                color: "white",
-                height: "6vh",
-                width: "63vh",
-                fontSize: "2rem",
-                borderRadius: "10px",
-                "&:hover": {
-                  background: "white",
-                  color: "#6CAAD9",
-                  border: "4px solid #6CAAD9",
-                  fontWeight: "400",
-                },
-              }}
-            >
-              SUBMIT
-            </Button>
-            <Dialog
-              open={open}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={handleClose}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle>
-                {"Your SUDOKU is either not completed or wrong. Keep Trying!"}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleClose}>OKAY</Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+        </div>
+        <SubmitBtn
+          handleSubmit={handleSubmit}
+          handleClose={handleClose}
+          open={open}
+        />
       </div>
     </>
   );
