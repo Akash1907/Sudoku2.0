@@ -25,7 +25,7 @@ const init = async () => {
     port: process.env.PORT || 3000,
     routes: {
       cors: {
-        origin: ['https://sudoku2-0.vercel.app'],
+        origin: ['https://sudoku-frontend.vercel.app'],
         credentials: true,
       },
     },
