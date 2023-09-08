@@ -49,7 +49,7 @@ function LoginPage() {
       setOpen3(true);
     } else {
       axios
-        .post("https://sudoku-frontend.vercel.app/auth", object)
+        .post("https://sudoku2-0.vercel.app/auth", object)
         .then((response) => {
           console.log(response.data);
           console.log("login Success");

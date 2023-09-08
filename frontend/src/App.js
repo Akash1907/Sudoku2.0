@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import DifficultyPage from "./Pages/DifficultyPage";
 import LoginPage from "./Pages/LoginPage";
 import AvatarPage from "./Pages/AvatarPage";
@@ -6,11 +6,10 @@ import SudokuPage from "./Pages/SudokuPage";
 import ScorePage from "./Pages/ScorePage";
 import Header from "./Components/Header";
 import SignupPage from "./Pages/SignupPage";
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from "./context/UserContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-function App () {
-
+function App() {
   const initialEasy = [
     [6, -1, 9, 1, 5, -1, -1, 3, -1],
     [7, 4, -1, -1, -1, 6, -1, 9, 1],
@@ -32,7 +31,7 @@ function App () {
     [-1, 4, -1, 3, 7, -1, 5, -1, -1],
     [5, 1, -1, 2, 3, -1, -1, 9, -1],
     [4, 9, -1, -1, 8, -1, 7, -1, -1],
-    [2, -1, -1, -1, 4, -1, -1, -1, -1]
+    [2, -1, -1, -1, 4, -1, -1, -1, -1],
   ];
 
   const initialHard = [
@@ -50,33 +49,32 @@ function App () {
   const scoreEasy = 500;
   const scoreMed = 600;
   const scoreHard = 700;
-  
-return (
-  <UserProvider>
-  
-    <Header />
-    <Router>
-      <Routes>
-        <Route path= "/" element = {<LoginPage/>} />
-        <Route path = '/signup' element = {<SignupPage />} />
-        <Route path = '/choseAvatar' element = {<AvatarPage/>} />
-        <Route path="/difficulty" element={<DifficultyPage />} />
-        <Route
+
+  return (
+    <UserProvider>
+      <Header />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/choseAvatar" element={<AvatarPage />} />
+          <Route path="/difficulty" element={<DifficultyPage />} />
+          <Route
             path="/sudokuMedium"
-            element={<SudokuPage initial={initialMed} score={scoreEasy}/>}
+            element={<SudokuPage initial={initialMed} score={scoreEasy} />}
           />
           <Route
             path="/sudokuHard"
-            element={<SudokuPage initial={initialHard} score={scoreMed}/>}
+            element={<SudokuPage initial={initialHard} score={scoreMed} />}
           />
           <Route
             path="/sudokuEasy"
-            element={<SudokuPage initial={initialEasy} score={scoreHard}/>}
+            element={<SudokuPage initial={initialEasy} score={scoreHard} />}
           />
           <Route path="/scores" element={<ScorePage />} />
-      </Routes>
-    </Router>
-  </UserProvider>
-);
+        </Routes>
+      </Router>
+    </UserProvider>
+  );
 }
 export default App;
