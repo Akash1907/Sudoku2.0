@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./DifficultyPage.css";
-import Header from "../Components/Header";
-import axios from "axios";
 
 
 function DifficultyPage() {
-  const [currentUser, setCurrentUser] = useState({});
  
   return (
     <>

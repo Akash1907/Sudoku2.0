@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./ScorePage.css";
