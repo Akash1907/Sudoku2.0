@@ -20,29 +20,29 @@ const Joi = require("joi");
 //     },
 //   });
 
-// const init = async () => {
-//   const server = Hapi.server({
-//     port: process.env.PORT || 3000,
-//     routes: {
-//       cors: {
-//         origin: ['https://sudoku-frontend.vercel.app'],
-//         credentials: true,
-//       },
-//     },
-//   });
 const init = async () => {
   const server = Hapi.server({
-    port: 3000,
-    host: 'localhost',
-  });
-
-  // Register the hapi-cors plugin with appropriate options
-  await server.register({
-    plugin: HapiCors,
-    options: {
-      origins: ['https://sudoku-frontend.vercel.app'], // Whitelist your frontend domain
+    port: process.env.PORT || 3000,
+    routes: {
+      cors: {
+        origin: ['https://sudoku-frontend.vercel.app'],
+        credentials: true,
+      },
     },
   });
+// const init = async () => {
+//   const server = Hapi.server({
+//     port: 3000,
+//     host: 'localhost',
+//   });
+
+//   // Register the hapi-cors plugin with appropriate options
+//   await server.register({
+//     plugin: HapiCors,
+//     options: {
+//       origins: ['https://sudoku-frontend.vercel.app'], // Whitelist your frontend domain
+//     },
+//   });
 
   
 
