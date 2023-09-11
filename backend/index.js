@@ -9,7 +9,6 @@ const Avatar = require("./database/avatars");
 var users = [];
 const Joi = require("joi");
 
-
 const init = async () => {
   const server = Hapi.server({
     port: 8000,
@@ -19,7 +18,7 @@ const init = async () => {
   await server.register({
     plugin: HapiCors,
     options: {
-      origins: ['https://sudoku-frontend.vercel.app/'],
+      origins: ['https://sudoku-frontend.vercel.app'],
     },
   });
   
