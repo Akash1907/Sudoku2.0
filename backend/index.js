@@ -2,48 +2,26 @@
 
 const Hapi = require("@hapi/hapi");
 const cors = require("cors");
+const HapiCors = require('hapi-cors');
 require("./database/config");
 const User = require("./database/user");
 const Avatar = require("./database/avatars");
 var users = [];
 const Joi = require("joi");
 
-// const init = async () => {
-//   const server = Hapi.server({
-//     port: 8000,
-//     host: "localhost",
-//     routes: {
-//       cors: {
-//         origin: ["*"], // an array of origins or 'ignore'
-//         credentials: true, // boolean - 'Access-Control-Allow-Credentials'
-//       },
-//     },
-//   });
 
 const init = async () => {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
-    routes: {
-      cors: {
-        origin: ['https://sudoku-frontend.vercel.app'],
-        credentials: true,
-      },
+    port: 8000,
+    host: 'localhost',
+  });
+
+  await server.register({
+    plugin: HapiCors,
+    options: {
+      origins: ['https://sudoku-frontend.vercel.app/'],
     },
   });
-// const init = async () => {
-//   const server = Hapi.server({
-//     port: 3000,
-//     host: 'localhost',
-//   });
-
-//   // Register the hapi-cors plugin with appropriate options
-//   await server.register({
-//     plugin: HapiCors,
-//     options: {
-//       origins: ['https://sudoku-frontend.vercel.app'], // Whitelist your frontend domain
-//     },
-//   });
-
   
 
   server.route({
@@ -156,7 +134,7 @@ const init = async () => {
   
   server.route({
     method: 'POST',
-    path: '/setScore/{username}',
+    path: `/setScore/{username}`,
     handler: async (request, h) => {
       const { username } = request.params;
       const { score } = request.payload;
