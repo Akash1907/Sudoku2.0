@@ -133,7 +133,7 @@ const init = async () => {
   
   server.route({
     method: 'POST',
-    path: `/setScore/{username}`,
+    path: '/setScore/{username}',
     handler: async (request, h) => {
       const { username } = request.params;
       const { score } = request.payload;
