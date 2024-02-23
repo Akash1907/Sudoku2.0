@@ -42,7 +42,8 @@ function AvatarPage(props) {
 
   const getAllAvatars = () => {
     axios
-      .get("http://localhost:8000/getAvatars")
+      // .get("http://localhost:8000/getAvatars")
+      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
       .then((response) => {
         setAvatarData(response.data);
         console.log(response);
@@ -63,7 +64,7 @@ function AvatarPage(props) {
     }
     else{
       axios
-        .post("http://localhost:8000/register", object)
+        .post("https://sudoku2-0-akash1907.vercel.app/register", object)
         .then((response) => {
           console.log(response);
           setUser({

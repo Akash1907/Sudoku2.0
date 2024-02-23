@@ -18,8 +18,8 @@ const init = async () => {
   await server.register({
     plugin: HapiCors,
     options: {
-      // origins: ['https://sudoku-frontend.vercel.app'],
-      origins: ['http://localhost:3000']
+      origins: ['https://sudoku-frontend.vercel.app'],
+      // origins: ['http://localhost:3000']
     },
   });
   

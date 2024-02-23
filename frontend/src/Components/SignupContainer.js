@@ -97,7 +97,7 @@ const SignupContainer = () => {
       handleClose();
     } else {
       axios
-        .post("http://localhost:8000/register", object2)
+        .post("https://sudoku2-0-akash1907.vercel.app/register", object2)
         .then((response) => {
           console.log(response);
           setUser({

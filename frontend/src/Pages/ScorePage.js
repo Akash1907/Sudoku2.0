@@ -16,7 +16,7 @@ function ScorePage() {
 
   const getTopScorers = () => {
     axios
-      .get("http://localhost:8000/topScores")
+      .get("https://sudoku2-0-akash1907.vercel.app/topScores")
       .then((response) => {
         setTopScorer(response.data);
         setLoading(false);

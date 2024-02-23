@@ -77,7 +77,7 @@ function AvatarPart(props) {
 
   const getAllAvatars = () => {
     axios
-      .get("http://localhost:8000/getAvatars")
+      .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
       .then((response) => {
         setAvatarData(response.data);
         console.log(response);
