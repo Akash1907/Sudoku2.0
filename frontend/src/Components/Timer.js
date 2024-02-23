@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Timer(props) {
   
@@ -10,7 +10,7 @@ function Timer(props) {
             </div>
             <div className="midDot">:</div>
             <div className="time">
-                <p className="time-p">{props.minutes < 10 ? "0" + props.minutes :props. minutes}</p>
+                <p className="time-p">{props.minutes < 10 ? "0" + props.minutes : props.minutes}</p>
             </div>
             <div className="midDot">:</div>
             <div className="time">

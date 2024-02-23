@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@500&display=swap');
+
+
+.loginContainer{
+    display: flex;
+    justify-content: center; 
+    margin-top: 6vh;  
+}
+.loginContainer2{
+    padding: 3vh;
+    border-radius: 10px;
+    padding-bottom: 6vh; 
+    border: 2px solid #F1F3F4;
+}
+.loginHeading{
+    display: flex;
+    justify-content: space-around;
+}
+.loginHeading2{
+    font-size: 5vh;
+    letter-spacing: .2vh;
+    font-family: 'Nunito', sans-serif;
+    color: #6CAAD9;
+}
+.userID{
+    margin-top: 6vh;
+    display: flex;
+    justify-content: center;
+}
+.password{
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+}
+.loginInput::placeholder{
+    font-size: 2vh;
+    letter-spacing: .1vh;
+
+}
+.loginBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 6vh;
+}
+.guestBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 3vh;
+}
+.loginBtn2{
+    height: 5vh;
+    width: 51vh;
+    font-size: 2vh;
+    border-radius: 5px;
+    background-color: #6CAAD9;
+    color: white;
+    font-size: 2.4vh;
+    cursor: pointer;
+    letter-spacing: .1vh;
+    border: none;
+}
+.loginBtn2:hover{
+    color: black;
+    background-color: white;
+    border: 1px solid #6CAAD9;
+    color: #6CAAD9;
+    transition: all .2s ease-in-out;
+}
+.guestBtn2{
+    height: 5vh;
+    width: 51vh;
+    font-size: 2vh;
+    border-radius: 5px;
+    background-color: white;
+    color: #6CAAD9;
+    font-size: 2.4vh;
+    cursor: pointer;
+    letter-spacing: .1vh;
+    border: 1px solid #6CAAD9;
+}
+.guestBtn2:hover{
+    color: white;
+    background-color: #6CAAD9;
+    transition: all .2s ease-in-out;
+}

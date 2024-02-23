@@ -1,0 +1,33 @@
+.signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 6vh;
+}
+.signup2{
+    border: 2px solid #F1F3F4;
+    border-radius: 10px;
+    padding: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.alreadyAcc{
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
+}
+.alreadyAcc2{
+    color: rgb(117, 117, 117);
+}
+.navigateToLogin{
+    color: #6CAAD9;
+    margin-left: 1vh;
+    font-weight: 600;
+}

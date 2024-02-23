@@ -1,0 +1,74 @@
+.userArea{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 3vh;
+}
+.userImg{
+    height: 15vh;
+    width: 15vh;
+    border-radius: 50px;
+}
+.name{
+    color: #6CAAD9;
+    font-size: 4vh;
+    font-family: 'Nunito', sans-serif;
+}
+.username{
+    font-size: 2vh;
+    font-family: 'Nunito', sans-serif;
+    margin-top: -1vh;
+    color: #ACD1EF;
+}
+.avatarP{
+    display: flex;
+    justify-content: center;
+}
+.avatarP2{
+    color: rgb(117, 117, 117);
+    letter-spacing: .1vh;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5vh;
+    margin-top: 1vh;
+}
+.signupBtn1{
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    gap: 7vh;
+}
+.avatarPageBtns{
+    background-color: #6CAAD9;
+    border: none;
+    height: 6vh;
+    width: 14vh;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    color: white;
+    font-size: 3vh;
+}
+.avatarPageBtns:hover{
+    background-color: white;
+    color: #6CAAD9;
+    border: 3px solid #6CAAD9;
+}
+
+.listOfImg{
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 1px solid #909090;
+    gap: 2vh;
+    background-color: white;
+    height: 25vh;
+    width: 50vh;
+    overflow-y: scroll;
+    border-radius: 8px;
+    padding: 2vh;
+    cursor: pointer;
+}
+#selected{
+    outline: #6CAAD9 solid 6px;
+    border-radius: 50px;
+}

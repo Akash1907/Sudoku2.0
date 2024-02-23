@@ -1,0 +1,31 @@
+{
+    "name": "btn-sudoku",
+    "version": "0.4.7",
+    "description": "This package contains some buttons i.e. Next and previous, which helps in going back and forth between components and submit button which appears in the last component which helps in going to the next page. We just have to pass your list of all the components as well as the methods. For example - listOfCompoents[{page : first component, method : method to be handled while clicking next button}, {page : second component, method : again same}, {submitBtnCheck : submitBtnCheck, nextBtnCheck : nextBtnCheck, nextPage : the endpoint of your next page}]",
+    "main": "build/index.js",
+    "dependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.16.0",
+        "webpack": "^2.7.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack --watch",
+        "build": "webpack"
+    },
+    "author": {
+        "name": "Akash",
+        "email": "akash.youngster789@gmail.com"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "babel-preset-env": "^1.7.0",
+        "update": "^0.7.4"
+    }
+}

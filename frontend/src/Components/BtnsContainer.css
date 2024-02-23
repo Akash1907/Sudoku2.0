@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@500&display=swap');
+
+
+.BtnsContainer1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.btnsss{
+    background-color: #6CAAD9;
+    height: 5vh;
+    width: 12vh;
+    cursor: pointer;
+    margin-top: 2vh;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5vh;
+}
+.btnsss:hover{
+    color: #6CAAD9;
+    background-color: white;
+    border: 3px solid #6CAAD9;
+}

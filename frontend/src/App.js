@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import DifficultyPage from "./Pages/DifficultyPage";
-import LoginPage from "./Pages/LoginPage";
-import AvatarPage from "./Pages/AvatarPage";
+import StartingPage from "./Pages/StartingPage";
 import SudokuPage from "./Pages/SudokuPage";
 import ScorePage from "./Pages/ScorePage";
 import Header from "./Components/Header";
-import SignupPage from "./Pages/SignupPage";
 import { UserProvider } from "./context/UserContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -55,9 +53,7 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/choseAvatar" element={<AvatarPage />} />
+          <Route path="/" element={<StartingPage />} />
           <Route path="/difficulty" element={<DifficultyPage />} />
           <Route
             path="/sudokuMedium"
