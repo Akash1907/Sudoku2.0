@@ -48,7 +48,7 @@ function LoginContainer() {
       setOpen3(true);
     } else {
       axios
-        .post("https://sudoku2-0-akash1907.vercel.app//auth", object)
+        .post("https://sudoku2-0-akash1907.vercel.app/auth", object)
         .then((response) => {
           console.log(response.data);
           console.log("login Success");
