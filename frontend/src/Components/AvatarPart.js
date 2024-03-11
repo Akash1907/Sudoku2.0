@@ -9,75 +9,12 @@ import axios from "axios";
 
 function AvatarPart(props) {
 
-  // const name = localStorage.getItem('name');
-  // const username = localStorage.getItem('username');
-  // const password = localStorage.getItem('password');
-  // const [avatarData, setAvatarData] = useState([]);
-  // const [userAvatarUrl, setUserAvatarUrl] = useState("");
-  // const [score, setScore] = useState([]);
-  // const [open, setOpen] = useState(false);
-
-  // const object2 = {
-  //   username: username,
-  //   name: name,
-  //   password: password,
-  //   avatarUrl: userAvatarUrl,
-  //   score: score,
-  // };
-
-  // const { setUser } = useUser();
-
-
-  // const handleOptionClick = (value) => {
-  //   setUserAvatarUrl(value);
-  // };
-
-  // const getAllAvatars = () => {
-  //   axios
-  //     .get("http://localhost:8000/getAvatars")
-  //     .then((response) => {
-  //       setAvatarData(response.data);
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-  // useEffect(() => {
-  //   getAllAvatars();
-  // }, []);
-
-  // const collectUserData = async () => {
-  //   if (userAvatarUrl === "") {
-  //     handleClose();
-  //   } else {
-  //     axios
-  //       .post("http://localhost:8000/register", object2)
-  //       .then((response) => {
-  //         console.log(response);
-  //         setUser({
-  //           username: localStorage.getItem("username"),
-  //           name: localStorage.getItem("name"),
-  //           avatarUrl: userAvatarUrl,
-  //         });
-  //         localStorage.setItem("avatarUrl", userAvatarUrl);
-  //       })
-  //       // .then(() => NavigateToDifficulty())
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(!open);
-  // };
-
   const [avatarData, setAvatarData] = useState([]);
 
   const getAllAvatars = () => {
     axios
       .get("https://sudoku2-0-akash1907.vercel.app/getAvatars")
+      // .get('http//localhost:8000/getAvatars')
       .then((response) => {
         setAvatarData(response.data);
         console.log(response);

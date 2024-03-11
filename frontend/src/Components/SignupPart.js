@@ -10,69 +10,6 @@ import "./SignupPart.css";
 
 const SignupPart = (props) => {
 
-  // const [username, setUsername] = useState("");
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [cnfPassword, setCnfPassword] = useState("");
-  // const [open1, setOpen1] = useState(false);
-  // const [open2, setOpen2] = useState(false);
-  // const [open3, setOpen3] = useState(false);
-  // const [open4, setOpen4] = useState(false);
-  // const [open5, setOpen5] = useState(false);
-  // const [open6, setOpen6] = useState(false);
-
-  // const object1 = {
-  //   username: username,
-  // };
-
-  // const handleClose1 = () => {
-  //   setOpen1(false);
-  // };
-  // const handleClose2 = () => {
-  //   setOpen2(false);
-  // };
-  // const handleClose3 = () => {
-  //   setOpen3(false);
-  // };
-  // const handleClose4 = () => {
-  //   setOpen4(false);
-  // };
-  // const handleClose5 = () => {
-  //   setOpen5(false);
-  // };
-  // const handleClose6 = () => {
-  //   setOpen6(false);
-  // };
-
-  // const collectData = async () => {
-  //   if (username === "") {
-  //     setOpen3(true);
-  //     console.log(username);
-  //   } else if (name === "") {
-  //     setOpen4(true);
-  //     console.log("name null hai");
-  //   } else if (password === "") {
-  //     setOpen2(true);
-  //   } else if (password !== cnfPassword) {
-  //     setOpen1(true);
-  //   } else if (username.includes(" ")) {
-  //     setOpen5(true);
-  //   } else {
-  //     axios
-  //       .post("http://localhost:8000/signupAuth", object1)
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         localStorage.setItem("name", name);
-  //         localStorage.setItem("username", username);
-  //         localStorage.setItem("password", password);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         setOpen6(true);
-  //       });
-  //   }
-  // };
-
   return (
     <div className="signupContainer">
       <div className="for">

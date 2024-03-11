@@ -8,32 +8,10 @@ function BtnSudoku(a) {
   console.log(indexes);
   const [step, setStep] = useState(0);
 
-
-  
-// const navigate = useNavigate();
-  // const NavigateToNextPage = () => {
-  //   navigate(`/${props.page}`);
-  // };
-  // const handleNext = () => {
-  //   console.log("Next button is clicked");
-  //   console.log(step);
-  //   props.listOfComponents[step].method();
-  //   if (props.nextBtnCheck) {
-  //     setStep(step + 1);
-  //     console.log("state changed");
-  //   }
-  // };
-
   const handleNext = () => {
     console.log("Next button is clicked");
     console.log(step);
     setStep(step + 1);
-  }
-  // const handlePrevious = () => {
-  //   setStep(step - 1);
-  //   console.log("Previous button is clicked");
-  //   console.log(step);
-  // };
 
   const handlePrevious = () => {
     console.log("Previous button is clicked");
@@ -43,10 +21,6 @@ function BtnSudoku(a) {
 
   const handleSubmit = () => {
     console.log("Submit button is clicked");
-    // props.listOfComponents[step].method();
-    // if (props.submitBtnCheck) {
-    //   NavigateToNextPage();
-    // }
   };
 
   return (

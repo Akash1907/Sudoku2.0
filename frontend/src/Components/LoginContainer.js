@@ -49,6 +49,7 @@ function LoginContainer() {
     } else {
       axios
         .post("https://sudoku2-0-akash1907.vercel.app/auth", object)
+        // .post('http//localhost:8000/auth', object)
         .then((response) => {
           console.log(response.data);
           console.log("login Success");
