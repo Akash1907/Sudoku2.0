@@ -60,7 +60,7 @@ const SignupContainer = () => {
     } else {
       axios
         // .post("http://localhost:8000/signupAuth", object1)
-        .post('https://sudoku2-0-akash1907.vercel.app/signupAuth', object)
+        .post('https://sudoku2-0-akash1907.vercel.app/signupAuth', object1)
         .then((response) => {
           console.log(response.data);
           localStorage.setItem("name", name);
